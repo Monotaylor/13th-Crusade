@@ -30,6 +30,26 @@
 	initial_flooring = /decl/flooring/grass
 	footstep_sound = "grassstep"
 
+/turf/simulated/floor/bridge
+	name = "Bridge"
+	icon = 'icons/turf/flooring/misc.dmi'
+	icon_state = "bridge0"
+	initial_flooring = /decl/flooring/bridge
+	footstep_sound = "concretestep"
+
+/turf/simulated/floor/grass/update_dirt()
+	return	// Grass doesn't get dirty.
+
+/turf/simulated/floor/farm
+	name = "farmland"
+	icon = 'icons/turf/flooring/grass.dmi'
+	icon_state = "farm0"
+	initial_flooring = /decl/flooring/farm
+	footstep_sound = "dirtstep"
+
+/turf/simulated/floor/farm/update_dirt()
+	return	// farms don't get dirty.
+
 /turf/simulated/floor/carpet/blue
 	name = "blue carpet"
 	icon_state = "bcarpet"

@@ -38,15 +38,33 @@ var/list/flooring_types
 	var/flags
 	var/can_paint
 
+/decl/flooring/bridge
+	name = "Bridge"
+	desc = "It's set in Large, Sturdy stone."
+	icon = 'icons/turf/flooring/misc.dmi'
+	icon_base = "bridge"
+	has_base_range = 3
+	damage_temperature = T0C+800
+	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
+
 /decl/flooring/grass
 	name = "grass"
-	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
+	desc = "A lush patch of grass! "
 	icon = 'icons/turf/flooring/grass.dmi'
 	icon_base = "grass"
 	has_base_range = 3
 	damage_temperature = T0C+80
 	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
 	build_type = /obj/item/stack/tile/grass
+
+/decl/flooring/farm
+	name = "grass"
+	desc = "A Tilled Sample of Dirt, Good for farming on"
+	icon = 'icons/turf/flooring/grass.dmi'
+	icon_base = "farm"
+	has_base_range = 3
+	damage_temperature = T0C+80
+	flags = TURF_REMOVE_SHOVEL
 
 /decl/flooring/asteroid
 	name = "coarse sand"
@@ -144,7 +162,7 @@ var/list/flooring_types
 	damage_temperature = T0C+200
 	descriptor = "planks"
 	build_type = /obj/item/stack/tile/wood
-	flags = TURF_CAN_BREAK | TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER | TURF_CAN_BURN
+	flags = TURF_CAN_BREAK 
 
 /decl/flooring/reinforced
 	name = "reinforced floor"
@@ -197,7 +215,7 @@ var/list/flooring_types
 
 /decl/flooring/reinforced/ramp/bottom
 	icon_base = "rampbot"
-	
+
 /decl/flooring/diona
 	name = "biomass"
 	desc = "a mass of small intertwined aliens forming a floor... Creepy."

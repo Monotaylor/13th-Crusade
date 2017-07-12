@@ -2057,7 +2057,87 @@ area/space/atmosalert()
 /area/generic
 	name = "Unknown"
 	icon_state = "storage"
+//Actual Map stuff, not gonna touch the others cuz it'll break probably I dont actually know. if it's safe to remove, I'll remove em later.
+/area/battlefield/generic
+	name = "Battleground"
+	icon_state = "Battleground"
+	requires_power = 0
+	dynamic_lighting = 0
 
+/area/battlefield/cavern
+	name = "Cave"
+	icon_state = "cave"
+	requires_power = 0
+
+/area/battlefield/Farm
+	name = "Farm"
+	icon_state = "Farm"
+	requires_power = 0
+	dynamic_lighting = 0
+
+/area/battlefield/Brewery
+	name = "Brewery"
+	icon_state = "Brewery"
+	requires_power = 0
+
+//Dark Crusader Stuff
+/area/battlefield/DarkCastle
+	name = "Dark Crusader Castle"
+	icon_state = "DarkCastle"
+	requires_power = 0
+	dynamic_lighting = 0
+
+/area/battlefield/DarkCastleMine
+	name = "Mine"
+	icon_state = "Blacksmith"
+	requires_power = 0
+
+/area/battlefield/DarkChurch
+	name = "Dark Church"
+	icon_state = "DarkChruch"
+	requires_power = 0
+	dynamic_lighting = 0
+
+/area/battlefield/DarkBlacksmith
+	name = "DarkBlacksmith"
+	icon_state = "BlackSmith"
+	requires_power = 0
+
+
+/area/battlefield/DarkMeadHall
+	name = "Dark Crusader Mead Hall"
+	icon_state = "Castle"
+	requires_power = 0
+	dynamic_lighting = 0
+
+//Crusader Stuff
+/area/battlefield/Castle
+	name = "Crusader Castle"
+	icon_state = "Castle"
+	requires_power = 0
+	dynamic_lighting = 0
+
+/area/battlefield/MeadHall
+	name = "Crusader Mead Hall"
+	icon_state = "Castle"
+	requires_power = 0
+	dynamic_lighting = 0
+
+/area/battlefield/CastleMine
+	name = "Mine"
+	icon_state = "Blacksmith"
+	requires_power = 0
+
+/area/battlefield/Church
+	name = "Church"
+	icon_state = "Church"
+	requires_power = 0
+	dynamic_lighting = 0
+
+/area/battlefield/Blacksmith
+	name = "Blacksmith"
+	icon_state = "BlackSmith"
+	requires_power = 0
 
 
 // Telecommunications Satellite
