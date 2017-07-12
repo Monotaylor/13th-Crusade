@@ -45,6 +45,8 @@
 /turf/simulated/wall/sandstone/Initialize(mapload)
 	. = ..(mapload,"sandstone")
 
+/turf/simulated/wall/sandstone/Initialize(mapload)
+	. = ..(mapload,"marble")
 /turf/simulated/wall/ironphoron/Initialize(mapload)
 	. = ..(mapload,"iron","phoron")
 
