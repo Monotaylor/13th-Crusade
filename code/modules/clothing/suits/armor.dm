@@ -528,3 +528,44 @@
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
 	siemens_coefficient = 1
+
+//Crusader Stuff goes here
+/obj/item/clothing/suit/armor/crusader
+	name = "Crusader Armor"
+	desc = "A suit of armor that excels in Cleansing the infidels."
+	icon_state = "knight_templar"
+	item_state = "knight_templar"
+	armor = list(melee = 40, bullet = 80, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	pocket_slots = 4
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+
+/obj/item/clothing/suit/armor/heavycrusader
+	name = "Heavy Crusader armor"
+	desc = "A suit of armor that excels in protecting the wearer from angry Infidels."
+	icon_state = "knight_grey"
+	item_state = "knight_grey"
+	armor = list(melee = 60, bullet = 80, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	pocket_slots = 2
+	slowdown = 3
+	w_class = 4//bulky item
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+
+/obj/item/clothing/suit/armor/crusader/dark
+	name = "Dark Crusader armor"
+	desc = "A suit of armor that excels in Cleansing the infidels."
+	icon_state = "knight_dark"
+	item_state = "knight_dark"
+	armor = list(melee = 40, bullet = 80, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	pocket_slots = 4
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+
+/obj/item/clothing/suit/armor/heavycrusader/dark
+	name = "bulletproof vest"
+	desc = "A suit of armor that excels in protecting the wearer from angry Infidels."
+	icon_state = "knight_heavy_dark"
+	item_state = "knight_heavy_dark"
+	armor = list(melee = 60, bullet = 80, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	pocket_slots = 2
+	slowdown = 3
+	w_class = 4//bulky item
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
