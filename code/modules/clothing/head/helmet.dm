@@ -171,3 +171,36 @@
 	name = "emergency response team medical helmet"
 	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
 	icon_state = "erthelmet_med"
+
+//crusader shit
+/obj/item/clothing/head/helmet/crusader
+	name = "Crusader Helmet"
+	desc = "Deus Vult."
+	icon_state = "knight_templar"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	body_parts_covered = HEAD|FACE
+	siemens_coefficient = 1
+
+/obj/item/clothing/head/helmet/crusaderHeavy
+	name = "gladiator helmet"
+	desc = "Deus Vult."
+	icon_state = "knight_templar"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	body_parts_covered = HEAD|FACE
+	siemens_coefficient = 1
+
+/obj/item/clothing/head/helmet/crusader/dark
+	name = "gladiator helmet"
+	desc = "Deus Vult."
+	icon_state = "knight_dark"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	body_parts_covered = HEAD|FACE
+	siemens_coefficient = 1
+
+/obj/item/clothing/head/helmet/crusaderHeavy/dark
+	name = "gladiator helmet"
+	desc = "Deus Vult."
+	icon_state = "knight_dark"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	body_parts_covered = HEAD|FACE
+	siemens_coefficient = 1

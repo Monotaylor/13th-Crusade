@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1499889361
-DIR: code\game code\game\gamemodes code\game\gamemodes\cult\cultify code\game\gamemodes\events code\game\machinery\smithing code\game\objects code\game\objects\structures code\game\turfs\flooring code\modules\clothing code\modules\holodeck icons icons\turf icons\turf\flooring maps maps\Plains 
+LAST_COMPILE_TIME: 1499906760
+DIR: code code\game code\game\gamemodes code\game\gamemodes\cult\cultify code\game\gamemodes\events code\game\objects code\game\objects\structures code\game\turfs\flooring code\modules code\modules\clothing code\modules\clothing\head icons icons\mob 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 511.1377
-WINDOW: icons\turf\flooring\misc.dmi;maps\Plains\plains-upper.dmm;maps\Plains\Plains.dmm
-FILE: maps\Plains\plains-upper.dmm
+WINDOW: icons\mob\head.dmi
+FILE: icons\mob\head.dmi
 */
 // END_INTERNALS
