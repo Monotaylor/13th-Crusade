@@ -1,6 +1,5 @@
 var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
-
-/datum/job/captain
+/*/datum/job/captain
 	title = "Captain"
 	flag = CAPTAIN
 	department = "Command"
@@ -99,3 +98,4 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H.back), slot_in_backpack)
 		return TRUE
+*/

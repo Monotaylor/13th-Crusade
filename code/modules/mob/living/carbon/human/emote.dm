@@ -447,7 +447,24 @@
 				else
 					message = "makes a noise."
 					m_type = 2
-
+		if ("warcry") //DEUS VULT: But seriously here, if people start to spam it, and the spam-saving thing is working overtime, consider adding a cooldown to it.
+			var/list/warcrys = list(
+				'sound/warcrys/warcry01.ogg',
+			)
+			var/warcrysound = pick(warcrys)
+			
+			if (miming)
+				message = "Mimes out a mighty Scream!"
+				m_type = 1
+			else
+				if (!muzzled)
+					message = "Screams a warcry, 'Deus Vult'!"
+					playsound(src.loc, warcrysound, 50, 0)
+					m_type = 2
+				else
+					message = "screams something through their gag."
+					m_type = 2
+				
 		if ("whimper")
 			if (miming)
 				message = "appears hurt."
