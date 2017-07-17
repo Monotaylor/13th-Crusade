@@ -1,4 +1,4 @@
-/datum/job/assistant
+/*/datum/job/assistant
 	title = "Assistant"
 	flag = ASSISTANT
 	department = "Civilian"
@@ -13,6 +13,7 @@
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 	//alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Security Cadet", "Visitor")
 	alt_titles = list("Visitor")
+*/
 
 /datum/job/assistant/equip(var/mob/living/carbon/human/H)
 	if(!H)

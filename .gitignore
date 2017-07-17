@@ -17,3 +17,4 @@ __pycache__/
 /.atom-build.json
 .vscode/
 *.int
+*.int

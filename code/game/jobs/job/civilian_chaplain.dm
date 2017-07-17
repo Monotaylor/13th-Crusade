@@ -1,4 +1,5 @@
 //Due to how large this one is it gets its own file
+/*
 /datum/job/chaplain
 	title = "Chaplain"
 	flag = CHAPLAIN
@@ -153,7 +154,7 @@
 			feedback_set_details("religion_deity","[new_deity]")
 			feedback_set_details("religion_book","[new_book_style]")
 		return TRUE
-
+*/
 
 /datum/job/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title)
 	return equip(H, alt_title, FALSE)

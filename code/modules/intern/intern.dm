@@ -1,3 +1,5 @@
+//?
+/*
 /datum/job/intern_sec
 	title = "Security Cadet"
 	flag = INTERN_SEC
@@ -95,3 +97,4 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/beret/engineering(H), slot_head)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(H), slot_l_ear)
 		return 1
+*/

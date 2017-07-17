@@ -49,9 +49,39 @@ var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
 var/const/ASSISTANT			=(1<<13)
 
+var/const/TEAM1				=(1<<0)
+
+var/const/DARKCRUSADER			=(1<<1)
+var/const/DARKBLACKSMITH		=(1<<2)
+var/const/DARKBARD				=(1<<3)
+var/const/DARKPRIEST			=(1<<4)
+var/const/DARKFARMER			=(1<<5)
+
+var/const/TEAM2				=(1<<1)
+
+var/const/CRUSADER			=(1<<6)
+var/const/BLACKSMITH		=(1<<7)
+var/const/BARD				=(1<<8)
+var/const/PRIEST			=(1<<9)
+var/const/FARMER			=(1<<10)
 
 var/list/assistant_occupations = list() //Leaving this on one line stops Travis complaining ~Scopes
 
+//money shit below. will probably remove the other jobs if it doesn't break anything
+var/list/crusader_positions = list(
+	"Crusader",
+	"Bard",
+	"King",
+	"Blacksmith",
+	"Farmer",
+)
+
+var/list/dark_crusader_positions = list(
+	"Dark Crusader",
+	"Bard",
+	"Blacksmith",
+	"Farmer",
+)
 
 var/list/command_positions = list(
 	"Captain",
