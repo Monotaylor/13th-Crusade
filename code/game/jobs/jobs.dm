@@ -74,13 +74,17 @@ var/list/crusader_positions = list(
 	"King",
 	"Blacksmith",
 	"Farmer",
+	"Priest",
+
 )
 
 var/list/dark_crusader_positions = list(
 	"Dark Crusader",
-	"Bard",
-	"Blacksmith",
-	"Farmer",
+	"Dark Bard",
+	"Dark Blacksmith",
+	"Dark Farmer",
+	"Dark King",
+	"Dark Priest",
 )
 
 var/list/command_positions = list(

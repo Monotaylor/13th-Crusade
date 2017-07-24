@@ -9,7 +9,7 @@
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	mob_size = 9//Based on average weight of a human
-
+	var/teamvalue
 /mob/living/carbon/human/Initialize(mapload, var/new_species = null)
 	eat_types |= TYPE_ORGANIC//Any mobs that are given the devour verb, can eat nonhumanoid organics. Only applies to unathi for now
 
@@ -444,8 +444,8 @@
 			shock_damage *= 0.8
 		visible_message("<span class='warning'>[src] was shocked by [source]!</span>", "<span class='danger'>You are shocked by [source]!</span>", "<span class='notice'>You hear an electrical crack.</span>")
 	var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
-	var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
-	return ..(shock_damage, source, siemens_coeff, def_zone, tesla_shock)
+	//var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
+	//return ..(shock_damage, source, siemens_coeff, def_zone, tesla_shock)
 
 /mob/living/carbon/human/Topic(href, href_list)
 	if (href_list["refresh"])
