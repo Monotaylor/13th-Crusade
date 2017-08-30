@@ -50,16 +50,16 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		usr << "You've already started work! Finish what you've started, asshole!"
 		return
 	var/currentobj = input("Anvil Selection", "what would you like to make?") as null|anything in possibleitems
-	usr << "blah"
+	usr << "you've decided to make a [currentobj]."
 	switch (currentobj) //todo: make this datumised baybee
 		if ("Test1")
 			hits = 1
 			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
+			hitcost = 5
 		if ("Test2")
 			hits = 2
 			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
+			hitcost = 10
 		if ("Test3")
 			hits = 3
 			spawneditem = /mob/living/simple_animal/corgi/Ian
@@ -112,13 +112,14 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	if (cooldown > world.time)
 		if (limiter = TRUE) //should act as a cooldown, untill the limiter is removed.
 			return
-	if (storedmetal <= minmetal)
+	if (storedmetal <= minmetal || storedmetal < hitcost)
 		visible_message("The anvil makes a dull sounding tinking noise. looks like there's not enough metal on it to keep working.")
-		playsound(src, 'sound/machines/anvil4.ogg', 50, 1)//todo, replace this with a tink
+		playsound(src, 'sound/machines/anvil4.ogg', 50, 1)
+		cooldown = world.time + 1 SECONDS
 		return
 	if (currentobj = null)
 		visible_message("The anvil makes a empty sounding tinking noise. looks like there's no point to hitting an anvil if you aren't working on something on it.")
-		playsound(src, 'sound/machines/anvil3.ogg', 50, 1)//todo, replace this with a CLANG
+		playsound(src, 'sound/machines/anvil3.ogg', 50, 1)
 		cooldown = world.time + 1 SECONDS
 		return
 
@@ -130,6 +131,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	else
 		cooldown = world.time + 1 SECONDS
 		hits-- //subtracts one hit somehow?
+		storedmetal -= hitcost
 		playsound(src, 'sound/machines/anvil3.ogg', 50, 1)
 
 /obj/machinery/smithing/anvil/proc/refill()
