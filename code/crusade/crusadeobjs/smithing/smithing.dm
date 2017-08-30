@@ -7,15 +7,15 @@ obj/machinery/smithing/
 	icon = 'icons/obj/crusade/smithing.dmi'
 
 obj/machinery/smithing/anvil //I have no idea what I am doing.
-	var/storedmetal = 0
+	var/storedmetal = 0 //current metal reserve
 	var/currentobj
 	var/hits = 0
-	var/maxmetal = 100
-	var/minmetal = 0
-	var/cooldown
-	var/limiter = TRUE
-	var/spawneditem
-	var/hitcost
+	var/maxmetal = 100	//maximum metal stored
+	var/minmetal = 0	//duh
+	var/cooldown		//current time remaining in the cooldown
+	var/limiter = TRUE //if there's a cooldown
+	var/spawneditem		//currently spawned item
+	var/hitcost			//metal removed from reserve on hit.
 	name = "Anvil"
 	desc = "Clang"
 	icon_state = "anvil"
@@ -23,6 +23,12 @@ obj/machinery/smithing/anvil //I have no idea what I am doing.
 	use_power = 0
 	density = 1
 
+obj/machinery/smithing/anvil/examine(mob/user)
+	..()	//I have no clue what this does, yet am scared to remove it.
+	if(storedmetal > 0)
+		user << "It has [storedmetal] units of metal left in it's storage. "
+	else
+		user << "It looks like it has no metal left."
 
 /obj/machinery/smithing/anvil/verb/changetargetitem()
 	set name = "Select item"
@@ -53,43 +59,54 @@ obj/machinery/smithing/anvil //I have no idea what I am doing.
 		if ("Test2")
 			hits = 2
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test3")
 			hits = 3
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test4")
 			hits = 4
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test5")
 			hits = 5
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test6")
 			hits = 6
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test7")
 			hits = 7
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test8")
 			hits = 8
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test9")
 			hits = 9
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test10")
 			hits = 10
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test11")
 			hits = 11
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test12")
 			hits = 12
 			spawneditem = /mob/living/simple_animal/corgi/Ian
 		if ("Test13")
 			hits = 13
 			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
 		if ("Test14")
 			hits = 14
 			spawneditem = /mob/living/simple_animal/corgi/Ian
-
+			hitcost = 0
 /obj/machinery/smithing/anvil/proc/clang()//CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG
 	//This is the on hit shit for an anvil.
 	if (cooldown > world.time)
