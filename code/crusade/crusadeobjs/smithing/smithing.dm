@@ -1,0 +1,168 @@
+/* A never ending hoarde of shit code from yours truly
+-Pacmandevil
+*/
+obj/machinery/smithing/
+	name = "hmmmm"
+	desc = "It's broke"
+	icon = 'icons/obj/crusade/smithing.dmi'
+
+obj/machinery/smithing/anvil //I have no idea what I am doing.
+	var/storedmetal = 0
+	var/currentobj
+	var/hits = 0
+	var/maxmetal = 100
+	var/minmetal = 0
+	var/cooldown
+	var/limiter = TRUE
+	var/spawneditem
+	var/hitcost
+	name = "Anvil"
+	desc = "Clang"
+	icon_state = "anvil"
+	anchored = 1
+	use_power = 0
+	density = 1
+
+
+/obj/machinery/smithing/anvil/verb/changetargetitem()
+	set name = "Select item"
+	set category = "Object"
+	set src in oview(1)
+	change_item()
+
+/obj/machinery/smithing/anvil/proc/change_item()
+	var/mob/M = usr
+	if(M.stat || M.paralysis || M.stunned || M.weakened || M.restrained())
+		usr << "you cannot decide on what to make at an Anvil when you're not in a state where you can concentrate, dingus."
+		return
+
+	var/list/possibleitems = list("Test1","Test2","Test3","Test4","Test5","Test6","Test7","Test8","Test9","Test10","Test11","Test12","Test13","Test14")
+	if(get_dist(usr, src) > 1)
+		usr << "You have moved too far away."
+		return
+	if (hits > 0)
+		usr << "You've already started work! Finish what you've started, asshole!"
+		return
+	var/currentobj = input("Anvil Selection", "what would you like to make?") as null|anything in possibleitems
+	usr << "blah"
+	switch (currentobj) //there's without a doubt a better way to do this. whatever tho. this is where you add possible items. you have to add to the list above as well. if anyone knows how to do this better lemmie know boyz
+		if ("Test1")
+			hits = 1
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+			hitcost = 0
+		if ("Test2")
+			hits = 2
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test3")
+			hits = 3
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test4")
+			hits = 4
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test5")
+			hits = 5
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test6")
+			hits = 6
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test7")
+			hits = 7
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test8")
+			hits = 8
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test9")
+			hits = 9
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test10")
+			hits = 10
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test11")
+			hits = 11
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test12")
+			hits = 12
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test13")
+			hits = 13
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Test14")
+			hits = 14
+			spawneditem = /mob/living/simple_animal/corgi/Ian
+
+/obj/machinery/smithing/anvil/proc/clang()//CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG
+	//This is the on hit shit for an anvil.
+	if (cooldown > world.time)
+		if (limiter = TRUE) //should act as a cooldown, untill the limiter is removed.
+			return
+	if (storedmetal <= minmetal)
+		visible_message("<FONT size = 3>The anvil makes a dull sounding tinking noise. looks like there's not enough metal on it to keep working.</FONT>")
+		playsound(src, 'sound\machines\anvil4.ogg', 50, 1)//todo, replace this with a tink
+		return
+	if (currentobj = null)
+		visible_message("<FONT size = 3>The anvil makes a empty sounding tinking noise. looks like there's no point to hitting an anvil if you aren't working on something on it.</FONT>")
+		playsound(src, 'sound\machines\anvil3.ogg', 50, 1)//todo, replace this with a CLANG
+		cooldown = world.time + 1 SECONDS
+		return
+
+	if (hits == 0)
+		playsound(src, 'sound\machines\anvil3.ogg', 50, 1)
+		cooldown = world.time + 1 SECONDS
+		spawnitem()
+		hits = 0
+	else
+		cooldown = world.time + 1 SECONDS
+		hits-- //subtracts one hit somehow?
+		playsound(src, 'sound\machines\anvil3.ogg', 50, 1)
+
+/obj/machinery/smithing/anvil/proc/refill()
+	if(storedmetal + 20 > maxmetal)
+		return
+	else
+		storedmetal = storedmetal + 20
+
+/obj/machinery/smithing/anvil/proc/spawnitem()
+	if (!spawneditem) return
+	//spawns the currently selected item, and changes the currentobj var to null.
+	new spawneditem(get_turf(src))
+	visible_message("<FONT size = 3>The anvil is supposed to make something here.</FONT>")
+	currentobj = null
+	spawneditem = null
+	playsound(src, 'sound\machines\anvil1.ogg', 50, 1)//todo, replace this with a good finishing sound.
+
+/obj/machinery/smithing/anvil/attackby(var/obj/item/O)
+	if(istype(O, /obj/item/weapon/smithing/hammer))
+		clang()
+	if(istype(O, /obj/item/weapon/smithing/ingot))
+		if (storedmetal > 80)
+			return
+		else
+			refill()
+			qdel(O)
+//this needs work ^
+
+
+//////////////////////////////
+///    HAMMER TIME BOYS    ///
+//////////////////////////////
+obj/item/weapon/smithing
+	name = "hmmmm"
+	desc = "It's broke"
+	icon = 'icons/obj/crusade/smithing.dmi'
+
+obj/item/weapon/smithing/hammer
+	name = "hammer"
+	desc = "Clang"
+	icon_state = "hammer"
+	force = 10
+
+obj/item/weapon/smithing/ingot
+	name = "iron ingot"
+	desc = "A low quality iron Ingot - This should be enough to add to your anvil"
+	icon_state = "ingot"
+
+	/* Todo
+	* Make it remove metal on hit using the usedmetal var
+	* Make the desc reflect the current metal value
+	* make this sane please 
+	*/

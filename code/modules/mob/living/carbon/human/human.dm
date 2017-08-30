@@ -443,7 +443,7 @@
 			apply_damage(shock_damage, BURN, area)
 			shock_damage *= 0.8
 		visible_message("<span class='warning'>[src] was shocked by [source]!</span>", "<span class='danger'>You are shocked by [source]!</span>", "<span class='notice'>You hear an electrical crack.</span>")
-	var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
+	//var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
 	//var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
 	//return ..(shock_damage, source, siemens_coeff, def_zone, tesla_shock)
 
