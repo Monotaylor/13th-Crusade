@@ -51,7 +51,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		return
 	var/currentobj = input("Anvil Selection", "what would you like to make?") as null|anything in possibleitems
 	usr << "blah"
-	switch (currentobj) //there's without a doubt a better way to do this. whatever tho. this is where you add possible items. you have to add to the list above as well. if anyone knows how to do this better lemmie know boyz
+	switch (currentobj) //todo: make this datumised baybee
 		if ("Test1")
 			hits = 1
 			spawneditem = /mob/living/simple_animal/corgi/Ian
@@ -113,24 +113,24 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		if (limiter = TRUE) //should act as a cooldown, untill the limiter is removed.
 			return
 	if (storedmetal <= minmetal)
-		visible_message("<FONT size = 3>The anvil makes a dull sounding tinking noise. looks like there's not enough metal on it to keep working.</FONT>")
-		playsound(src, 'sound\machines\anvil4.ogg', 50, 1)//todo, replace this with a tink
+		visible_message("The anvil makes a dull sounding tinking noise. looks like there's not enough metal on it to keep working.")
+		playsound(src, 'sound/machines/anvil4.ogg', 50, 1)//todo, replace this with a tink
 		return
 	if (currentobj = null)
-		visible_message("<FONT size = 3>The anvil makes a empty sounding tinking noise. looks like there's no point to hitting an anvil if you aren't working on something on it.</FONT>")
-		playsound(src, 'sound\machines\anvil3.ogg', 50, 1)//todo, replace this with a CLANG
+		visible_message("The anvil makes a empty sounding tinking noise. looks like there's no point to hitting an anvil if you aren't working on something on it.")
+		playsound(src, 'sound/machines/anvil3.ogg', 50, 1)//todo, replace this with a CLANG
 		cooldown = world.time + 1 SECONDS
 		return
 
 	if (hits == 0)
-		playsound(src, 'sound\machines\anvil3.ogg', 50, 1)
+		playsound(src, 'sound/machines/anvil3.ogg', 50, 1)
 		cooldown = world.time + 1 SECONDS
 		spawnitem()
 		hits = 0
 	else
 		cooldown = world.time + 1 SECONDS
 		hits-- //subtracts one hit somehow?
-		playsound(src, 'sound\machines\anvil3.ogg', 50, 1)
+		playsound(src, 'sound/machines/anvil3.ogg', 50, 1)
 
 /obj/machinery/smithing/anvil/proc/refill()
 	if(storedmetal + 20 > maxmetal)
@@ -145,7 +145,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	visible_message("<FONT size = 3>The anvil is supposed to make something here.</FONT>")
 	currentobj = null
 	spawneditem = null
-	playsound(src, 'sound\machines\anvil1.ogg', 50, 1)//todo, replace this with a good finishing sound.
+	playsound(src, 'sound/machines/anvil1.ogg', 50, 1)//todo, replace this with a good finishing sound.
 
 /obj/machinery/smithing/anvil/attackby(var/obj/item/O)
 	if(istype(O, /obj/item/weapon/smithing/hammer))
@@ -181,5 +181,5 @@ obj/item/weapon/smithing/ingot
 	/* Todo
 	* Make it remove metal on hit using the usedmetal var
 	* Make the desc reflect the current metal value
-	* make this sane please 
+	* make this sane please
 	*/
