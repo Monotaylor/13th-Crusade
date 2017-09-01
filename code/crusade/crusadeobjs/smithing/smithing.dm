@@ -42,7 +42,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		usr << "you cannot decide on what to make at an Anvil when you're not in a state where you can concentrate, dingus."
 		return
 
-	var/list/possibleitems = list("Test1","Test2","Test3","Test4","Test5","Test6","Test7","Test8","Test9","Test10","Test11","Test12","Test13","Test14")
+	var/list/possibleitems = list("Longsword","Shortsword","Battle Axe","Battle Hammer","Sabre","Dao","Claymore","Great Helm","Basic Armor","Heavy Armor")
 	if(get_dist(usr, src) > 1)
 		usr << "You have moved too far away."
 		return
@@ -52,45 +52,45 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	var/currentobj = input("Anvil Selection", "what would you like to make?") as null|anything in possibleitems
 	usr << "you've decided to make a [currentobj]."
 	switch (currentobj) //todo: make this datumised baybee
-		if ("Test1")
-			hits = 1
-			spawneditem = /mob/living/simple_animal/corgi/Ian
+		if ("Longsword")
+			hits = 10
+			spawneditem = /obj/item/weapon/material/sword/longsword
 			hitcost = 5
-		if ("Test2")
+		if ("Shortsword")
 			hits = 2
-			spawneditem = /mob/living/simple_animal/corgi/Ian
+			spawneditem = /obj/item/weapon/material/sword/gladius
 			hitcost = 10
-		if ("Test3")
+		if ("Battle Axe")
 			hits = 3
-			spawneditem = /mob/living/simple_animal/corgi/Ian
+			spawneditem = /obj/item/weapon/material/sword/axe
 			hitcost = 0
-		if ("Test4")
+		if ("Battle Hammer")
 			hits = 4
-			spawneditem = /mob/living/simple_animal/corgi/Ian
+			spawneditem = /mob/living/simple_animal/corgi/Ian //todo, add the battle hammer, 2 handed. skyrim style.
 			hitcost = 0
-		if ("Test5")
+		if ("Sabre")
 			hits = 5
 			spawneditem = /mob/living/simple_animal/corgi/Ian
 			hitcost = 0
-		if ("Test6")
+		if ("Dao")
 			hits = 6
 			spawneditem = /mob/living/simple_animal/corgi/Ian
 			hitcost = 0
-		if ("Test7")
+		if ("Claymore")
 			hits = 7
 			spawneditem = /mob/living/simple_animal/corgi/Ian
 			hitcost = 0
-		if ("Test8")
+		if ("Great Helm")
 			hits = 8
-			spawneditem = /mob/living/simple_animal/corgi/Ian
+			spawneditem = /obj/item/clothing/head/helmet/crusader
 			hitcost = 0
-		if ("Test9")
+		if ("Basic Armor")
 			hits = 9
-			spawneditem = /mob/living/simple_animal/corgi/Ian
+			spawneditem = /obj/item/clothing/suit/armor/crusader
 			hitcost = 0
-		if ("Test10")
+		if ("Heavy Armor")
 			hits = 10
-			spawneditem = /mob/living/simple_animal/corgi/Ian
+			spawneditem = /obj/item/clothing/suit/armor/heavycrusader
 			hitcost = 0
 		if ("Test11")
 			hits = 11

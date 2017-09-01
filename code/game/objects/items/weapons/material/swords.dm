@@ -103,3 +103,15 @@
 	item_state = "gladius"
 	contained_sprite = 1
 	slot_flags = SLOT_BELT
+
+//Crusade stuff below
+
+/obj/item/weapon/material/sword/holy
+	name = "Holy Broadsword"
+	desc = "A work of art of a sword - though something seems missing from this holy masterpeice.."
+	icon = 'icons/obj/sword.dmi'
+	icon_state = "runesword1"
+	item_state = "runesword1"
+	contained_sprite = 1
+	slot_flags = SLOT_BELT
+	

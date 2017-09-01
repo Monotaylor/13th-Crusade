@@ -181,26 +181,3 @@
 	body_parts_covered = HEAD|FACE
 	siemens_coefficient = 1
 
-/obj/item/clothing/head/helmet/crusaderHeavy
-	name = "gladiator helmet"
-	desc = "Deus Vult."
-	icon_state = "knight_templar"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
-	body_parts_covered = HEAD|FACE
-	siemens_coefficient = 1
-
-/obj/item/clothing/head/helmet/crusader/dark
-	name = "gladiator helmet"
-	desc = "Deus Vult."
-	icon_state = "knight_dark"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
-	body_parts_covered = HEAD|FACE
-	siemens_coefficient = 1
-
-/obj/item/clothing/head/helmet/crusaderHeavy/dark
-	name = "gladiator helmet"
-	desc = "Deus Vult."
-	icon_state = "knight_dark"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
-	body_parts_covered = HEAD|FACE
-	siemens_coefficient = 1
