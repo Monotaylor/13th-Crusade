@@ -15,37 +15,46 @@ obj/machinery/smithing/ore
 	var/lastrecordedtime
 	var/diff
 	var/maxore = 5 //This should really be adjusted later depending on how I do the smelting.
-
+	var/spawnedore
 obj/machinery/smithing/ore/Initialize()
 	lastrecordedtime = world.time
 
-obj/machinery/smiting/ore/proc/regenore()//regenerates the ore based on the time that's passed.
+obj/machinery/smithing/ore/proc/regenore()//regenerates the ore based on the time that's passed.
 	diff = (world.time - lastrecordedtime)/60
 	storedore = storedore + diff
-	if storedore > maxore
+	if (storedore > maxore)
 		storedore = maxore
 
 obj/machinery/smithing/ore/examine(mob/user)
 	..()	//I have no clue what this does, yet am scared to remove it.
 	regenore()
-	//usr << "it has [storedore] units of ore remaining"
-	switch(storedore) //this might be impractical based on how I do the smelting. 
+	switch(storedore) //this might be impractical based on how I do the smelting.
 		if(1)
-			usr << "blah1"
+			usr << "the Rock looks baren, with few visible examples of ore"
 		if(2)
-			usr << "bla2h"
+			usr << "the Rock has a few examples of ore in it, though not much"
 		if(3)
-			usr << "blah3"
+			usr << "the Rock appears to have a decent ammount of ore in it."
 		if(4)
-			usr << "blah4"
+			usr << "The rock has a large ammount of ore in it."
 		if(5)
-			usr << "blah5"
+			usr << "the rock is rich and full of ore. neat."
 
 obj/machinery/smithing/ore/proc/mine()
+	//decide on a random ore quality. 60% chance for low, 40% for medium, and 10% for GOOD SHIT
+	//if (storedore != 5) in case I think adding a bonus for richer ore is a good idea.
+	switch(rand(1,10))
+		if (1 to 5)
+			spawnedore = /obj/item/weapon/smithing/ore
+		if (6 to 8)
+			spawnedore = /obj/item/weapon/smithing/ore/medium
+		else
+			spawnedore = /obj/item/weapon/smithing/ore/high
+
 	lastrecordedtime = world.time
 	playsound(src, 'sound/machines/anvil3.ogg', 50, 1)//give this it's own thing?
 	storedore = storedore - 1
-	new obj/item/weapon/smithing/ore (get_turf(src))
+	new spawnedore(get_turf(src))
 
 obj/machinery/smithing/ore/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))//todo, replace with a weilded pick fuck my life, also reduce the damage on weilded picks lmao they're still probably OP as fuck here.
@@ -53,11 +62,25 @@ obj/machinery/smithing/ore/attackby(var/obj/item/weapon/W as obj, var/mob/user a
 	regenore()
 	mine()
 
+
+//ores below//
+
 obj/item/weapon/smithing/ore
 	name = "Ore"
 	desc = "A chunk of ore - With enough processing, this could one day be used for something useful."
 	icon_state = "ore"
+	var/quality = "low"
 
+obj/item/weapon/smithing/ore/medium
+	quality = "medium"
 
+obj/item/weapon/smithing/ore/high
+	quality = "high"
 
-	
+obj/item/weapon/smithing/ore/examine(mob/user)
+	..()	//I have no clue what this does, yet am scared to remove it.
+	if(quality)
+		user << "It is a [quality] sample of ore."
+	else
+		return
+	//ree

@@ -197,6 +197,8 @@
 #include "code\controllers\subsystems\processing\processing.dm"
 #include "code\controllers\subsystems\processing\shuttle.dm"
 #include "code\crusade\CrusadeProcs.dm"
+#include "code\crusade\crusadeobjs\smithing\mining.dm"
+#include "code\crusade\crusadeobjs\smithing\smelting.dm"
 #include "code\crusade\crusadeobjs\smithing\smithing.dm"
 #include "code\datums\ai_law_sets.dm"
 #include "code\datums\ai_laws.dm"
