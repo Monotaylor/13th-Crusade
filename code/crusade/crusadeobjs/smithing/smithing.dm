@@ -42,7 +42,11 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		usr << "you cannot decide on what to make at an Anvil when you're not in a state where you can concentrate, dingus."
 		return
 
-	var/list/possibleitems = list("Longsword","Shortsword","Battle Axe","Battle Hammer","Sabre","Dao","Claymore","Great Helm","Basic Armor","Heavy Armor")
+	var/list/possibleitems = list("Longsword","Shortsword","Battle Axe",
+	"Battle Hammer","Sabre","Dao","Claymore",
+	"Great Helm","Basic Armor","Heavy Armor","Buckler","Large Shield","Kite Sheild")
+//I wonder if I can do this.
+
 	if(get_dist(usr, src) > 1)
 		usr << "You have moved too far away."
 		return
@@ -51,7 +55,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		return
 	var/currentobj = input("Anvil Selection", "what would you like to make?") as null|anything in possibleitems
 	usr << "you've decided to make a [currentobj]."
-	switch (currentobj) //todo: make this datumised baybee
+	switch (currentobj) //todo: make this datumised baybee - update the item paths so they work.
 		if ("Longsword")
 			hits = 10
 			spawneditem = /obj/item/weapon/material/sword/longsword
@@ -107,17 +111,18 @@ obj/machinery/smithing/anvil/examine(mob/user)
 			hits = 14
 			spawneditem = /mob/living/simple_animal/corgi/Ian
 			hitcost = 0
+			
 /obj/machinery/smithing/anvil/proc/clang()//CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG
 	//This is the on hit shit for an anvil.
 	if (cooldown > world.time)
-		if (limiter = TRUE) //should act as a cooldown, untill the limiter is removed.
+		if (limiter == TRUE) //should act as a cooldown, untill the limiter is removed.
 			return
 	if (storedmetal <= minmetal || storedmetal < hitcost)
 		visible_message("The anvil makes a dull sounding tinking noise. looks like there's not enough metal on it to keep working.")
 		playsound(src, 'sound/machines/anvil4.ogg', 50, 1)
 		cooldown = world.time + 1 SECONDS
 		return
-	if (currentobj = null)
+	if (currentobj == null)
 		visible_message("The anvil makes a empty sounding tinking noise. looks like there's no point to hitting an anvil if you aren't working on something on it.")
 		playsound(src, 'sound/machines/anvil3.ogg', 50, 1)
 		cooldown = world.time + 1 SECONDS

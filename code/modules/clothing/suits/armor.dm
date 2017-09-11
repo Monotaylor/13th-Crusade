@@ -535,7 +535,7 @@
 	desc = "A suit of armor that excels in Cleansing the infidels."
 	icon_state = "knight_templar"
 	item_state = "knight_templar"
-	armor = list(melee = 50, bullet = 80, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 60, bullet = 80, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
 	pocket_slots = 4
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 

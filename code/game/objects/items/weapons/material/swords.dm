@@ -108,10 +108,10 @@
 
 /obj/item/weapon/material/sword/holy
 	name = "Holy Broadsword"
-	desc = "A work of art of a sword - though something seems missing from this holy masterpeice.."
+	desc = "A work of art of a sword - though something seems missing from this holy masterpeice."
 	icon = 'icons/obj/sword.dmi'
 	icon_state = "runesword1"
 	item_state = "runesword1"
 	contained_sprite = 1
 	slot_flags = SLOT_BELT
-	
+	//todo, work on this alright thx

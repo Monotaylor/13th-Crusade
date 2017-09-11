@@ -172,7 +172,7 @@
 	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
 	icon_state = "erthelmet_med"
 
-//crusader shit
+//crusader shit goes below here.
 /obj/item/clothing/head/helmet/crusader
 	name = "Crusader Helmet"
 	desc = "Deus Vult."
