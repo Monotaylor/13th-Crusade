@@ -2,7 +2,7 @@
 obj/machinery/smithing/smelter
 	name = "Ore Rock thing"
 	desc = "A smeltery. often used for smelting ore and other stuff."
-	icon_state = "anvil"
+	icon_state = "anvil" //todo, incorperate iconstates properly thanks. have all the different ones needed for pouring etc
 	anchored = 1
 	use_power = 0
 	density = 1
@@ -70,16 +70,36 @@ obj/machinery/smithing/smelter/proc/updateFire()
 
 
 obj/machinery/smithing/smelter/proc/meltOre
-
-//todo aaaa.
 //factor in the temp when melting.
-	MeltAmmount = Temp/10 //round this?
-	if (MeltAmmount < 1)
-		MeltAmmount = 1
-	if (HighOreLiquid >= MaxStorage)
+	if(HighOreLiquid>=MaxStorage && MediumOreLiquid>=MaxStorage && LowOreLiquid>=MaxStorage) //if all the storages are full.
 		HighOreLiquid = MaxStorage
-		continue
+		MediumOreLiquid = MaxStorage
+		LowOreLiquid = MaxStorage
+		onFire = FALSE
+		visible_message("The Fire on the Smelter goes out!")
+		return
 	else
-		if (HighOreLiquid + MeltAmmount/2)
-			//do the math to do this right alright
+		//gets the current remainder till the thing's full
+		//High quality shit
+		var/remainder = (MaxStorage - HighOreLiquid)
+		if (remainder > MaxStorage)
+			remainder = 0
+		MeltAmmount = round(Temp/10) //takes the current remainder and temp into consideration.
+			if (MeltAmmount > remainder)
+				MeltAmmount = remainder
 
+		if HighOreSolid<MeltAmmount
+			MeltAmmount = HighOreSolid
+		HighOreSolid -= MeltAmmount
+		if HighOreSolid < 0
+			HighOreSolid = 0
+		HighOreLiquid += MeltAmmount/0.7 //.7 is a meme idk what I'm doing. 
+
+
+
+			
+
+			
+			
+
+	
