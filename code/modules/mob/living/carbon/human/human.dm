@@ -441,14 +441,6 @@
 			shock_damage *= gloves.siemens_coefficient
 
 		for (var/area in damage_areas)
-<<<<<<< HEAD
-			apply_damage(shock_damage, BURN, area)
-			shock_damage *= 0.8
-		visible_message("<span class='warning'>[src] was shocked by [source]!</span>", "<span class='danger'>You are shocked by [source]!</span>", "<span class='notice'>You hear an electrical crack.</span>")
-	var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
-	//var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
-	//return ..(shock_damage, source, siemens_coeff, def_zone, tesla_shock)
-=======
 			apply_damage(shock_damage, BURN, area, used_weapon="Electrocution")
 			shock_damage *= 0.4
 			playsound(loc, "sparks", 50, 1, -1)
@@ -472,7 +464,6 @@
 		spark(loc, 5, alldirs)
 
 	return shock_damage
->>>>>>> upstream/development
 
 /mob/living/carbon/human/Topic(href, href_list)
 	if (href_list["refresh"])
