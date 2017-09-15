@@ -100,15 +100,31 @@ obj/machinery/smithing/smelter/proc/meltOre
 		var/MMeltAmmount = MeltAmmount
 		var/LMeltAmmount = MeltAmmount
 
-
 		if (HighOreSolid < MeltAmmount)
 			HMeltAmmount = HighOreSolid
 
 		if (MediumOreSolid < MeltAmmount)
 			MMeltAmmount = MediumOreSolid
-			
-
+	
 		if (LowOreSolid < MeltAmmount)
 			LMeltAmmount = LowOreSolid
 
 		//actually melts it the mad lad.
+		
+		if (LowOreLiquid + LMeltAmmount > MaxStorage)
+			continue
+		else
+			LowOreLiquid += round(LMeltAmmount/1.2)//change this later to be represented by heat probably idk I just want this to work
+			LowOreSolid -= LMeltAmmount
+
+		if (MediumOreLiquid + MMeltAmmount > MaxStorage)
+			continue
+		else
+			MediumOreLiquid += round(MMeltAmmount/1.2)
+			MediumOreSolid -= MMeltAmmount
+		
+		if (HighOreLiquid + HMeltAmmount > MaxStorage)
+			continue
+		else
+			HighOreLiquid += round(HMeltAmmount/1.2)
+			HighOreSolid -= HMeltAmmount

@@ -171,13 +171,3 @@
 	name = "emergency response team medical helmet"
 	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
 	icon_state = "erthelmet_med"
-
-//crusader shit goes below here.
-/obj/item/clothing/head/helmet/crusader
-	name = "Crusader Helmet"
-	desc = "Deus Vult."
-	icon_state = "knight_templar"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
-	body_parts_covered = HEAD|FACE
-	siemens_coefficient = 1
-
