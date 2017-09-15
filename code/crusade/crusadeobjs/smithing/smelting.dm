@@ -2,7 +2,7 @@
 obj/machinery/smithing/smelter
 	name = "Ore Rock thing"
 	desc = "A smeltery. often used for smelting ore and other stuff."
-	icon_state = "anvil" //todo, incorperate iconstates properly thanks. have all the different ones needed for pouring etc
+	icon_state = "anvil" //todo, incorperate iconstates properly
 	anchored = 1
 	use_power = 0
 	density = 1
@@ -19,8 +19,7 @@ obj/machinery/smithing/smelter
 	var/Temp
 	var/Fuel
 	var/MaxStorage = 1000 //This might need changing later.
-	var/CastTemp
-	var/MeltAmmount
+
 
 obj/machinery/smithing/smelter/proc/loopcheck //the main loop. this is probably a reaLly bad way of doing it. have an "igite" verb to start it.
 	while (onFire)
@@ -79,27 +78,37 @@ obj/machinery/smithing/smelter/proc/meltOre
 		visible_message("The Fire on the Smelter goes out!")
 		return
 	else
-		//gets the current remainder till the thing's full
-		//High quality shit
-		var/remainder = (MaxStorage - HighOreLiquid)
-		if (remainder > MaxStorage)
-			remainder = 0
-		MeltAmmount = round(Temp/10) //takes the current remainder and temp into consideration.
-			if (MeltAmmount > remainder)
-				MeltAmmount = remainder
+		//gets the remaining storage for liquids.
+		var/HQremainder = MaxStorage - HighOreLiquid
+		if (HQremainder < 0)
+			HQremainder = 0
+			HighOreLiquid = MaxStorage
 
-		if HighOreSolid<MeltAmmount
-			MeltAmmount = HighOreSolid
-		HighOreSolid -= MeltAmmount
-		if HighOreSolid < 0
-			HighOreSolid = 0
-		HighOreLiquid += MeltAmmount/0.7 //.7 is a meme idk what I'm doing. 
+		var/MQremainder = MaxStorage - MediumOreLiquid
+		if (MQremainder < 0)
+			MQremainder = 0
+			MediumOreLiquid = MaxStorage
+
+		var/LQremainder = MaxStorage - LowOreLiquid
+		if (LQremainder < 0)
+			LQremainder = 0
+			LowOreLiquid = MaxStorage
+
+		//gets the Solid ore melt ammount? - this is really shit oh god
+		var/MeltAmmount = round(Temp/10)
+		var/HMeltAmmount = MeltAmmount
+		var/MMeltAmmount = MeltAmmount
+		var/LMeltAmmount = MeltAmmount
 
 
+		if (HighOreSolid < MeltAmmount)
+			HMeltAmmount = HighOreSolid
 
+		if (MediumOreSolid < MeltAmmount)
+			MMeltAmmount = MediumOreSolid
 			
 
-			
-			
+		if (LowOreSolid < MeltAmmount)
+			LMeltAmmount = LowOreSolid
 
-	
+		//actually melts it the mad lad.
