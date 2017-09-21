@@ -1,6 +1,6 @@
 //Crusader Stuff goes here
 /obj/item/clothing/suit/armor/crusader
-	icon = 'icons/crusader/armour/crusader.dmi'
+	icon = 'icons/crusade/armour/crusader.dmi'
 	contained_sprite = 1
 
 /obj/item/clothing/suit/armor/crusader
@@ -24,7 +24,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 //Helmet
 /obj/item/clothing/head/helmet/crusader
-	icon = 'icons/crusader/armour/crusader.dmi'
+	icon = 'icons/crusade/armour/crusader.dmi'
 	name = "Crusader Helmet"
 	desc = "Deus Vult."
 	icon_state = "knight_templar"

@@ -4,7 +4,7 @@
 obj/machinery/smithing/
 	name = "hmmmm"
 	desc = "It's broke"
-	icon = 'icons/obj/crusade/smithing.dmi'
+	icon = 'icons/crusade/smithing.dmi'
 
 obj/machinery/smithing/anvil //I have no idea what I am doing.
 	var/storedmetal = 0 //current metal reserve
@@ -32,7 +32,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 
 /obj/machinery/smithing/anvil/verb/changetargetitem()
 	set name = "Select item"
-	set category = "Object"
+	set category = "Smithing"
 	set src in oview(1)
 	change_item()
 
@@ -94,7 +94,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 			hitcost = 0
 		if ("Heavy Armor")
 			hits = 10
-			spawneditem = /obj/item/clothing/suit/armor/heavycrusader
+			spawneditem = /obj/item/clothing/suit/armor/crusader/heavycrusader
 			hitcost = 0
 		if ("Test11")
 			hits = 11
@@ -111,7 +111,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 			hits = 14
 			spawneditem = /mob/living/simple_animal/corgi/Ian
 			hitcost = 0
-			
+
 /obj/machinery/smithing/anvil/proc/clang()//CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG
 	//This is the on hit shit for an anvil.
 	if (cooldown > world.time)
@@ -163,30 +163,5 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		else
 			refill()
 			qdel(O)
-//this needs work ^
 
-
-//////////////////////////////
-///    HAMMER TIME BOYS    ///
-//////////////////////////////
-obj/item/weapon/smithing
-	name = "hmmmm"
-	desc = "It's broke"
-	icon = 'icons/obj/crusade/smithing.dmi'
-
-obj/item/weapon/smithing/hammer
-	name = "hammer"
-	desc = "Clang"
-	icon_state = "hammer"
-	force = 10
-
-obj/item/weapon/smithing/ingot
-	name = "iron ingot"
-	desc = "A low quality iron Ingot - This should be enough to add to your anvil"
-	icon_state = "ingot"
-
-	/* Todo
-	* Make it remove metal on hit using the usedmetal var
-	* Make the desc reflect the current metal value
-	* make this sane please
-	*/
+//todo: DATUMISE ME BAYBEE

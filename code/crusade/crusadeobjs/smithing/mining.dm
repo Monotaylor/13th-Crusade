@@ -44,12 +44,24 @@ obj/machinery/smithing/ore/proc/mine()
 	//decide on a random ore quality. 60% chance for low, 40% for medium, and 10% for GOOD SHIT
 	//if (storedore != 5) in case I think adding a bonus for richer ore is a good idea.
 	switch(rand(1,10))
-		if (1 to 5)
+		if (1 to 4)
 			spawnedore = /obj/item/weapon/smithing/ore
-		if (6 to 8)
+		if (5 to 7)
 			spawnedore = /obj/item/weapon/smithing/ore/medium
 		else
 			spawnedore = /obj/item/weapon/smithing/ore/high
+			switch(rand(1,3))
+				if (1)
+					var/obj/item/weapon/smithing/coal/coal = new
+					coal.quality = "low"
+				if (2)
+					var/obj/item/weapon/smithing/coal/coal = new
+					coal.quality = "medium"
+				if (3)
+					var/obj/item/weapon/smithing/coal/coal = new
+					coal.quality = "high"
+
+
 
 	lastrecordedtime = world.time
 	playsound(src, 'sound/machines/anvil3.ogg', 50, 1)//give this it's own thing?
@@ -57,28 +69,13 @@ obj/machinery/smithing/ore/proc/mine()
 	new spawnedore(get_turf(src))
 
 obj/machinery/smithing/ore/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))//todo, replace with a weilded pick fuck my life, also reduce the damage on weilded picks lmao they're still probably OP as fuck here.
+	if (!istype(W, /obj/item/weapon/pickaxe))//todo, make this weilded.
 		return ..()
 	regenore()
 	mine()
 
-
-//ores below//
-
-obj/item/weapon/smithing/ore
-	name = "Ore"
-	desc = "A chunk of ore - With enough processing, this could one day be used for something useful."
-	icon_state = "ore"
-	var/quality = "low"
-
-obj/item/weapon/smithing/ore/medium
-	quality = "medium"
-
-obj/item/weapon/smithing/ore/high
-	quality = "high"
-
 obj/item/weapon/smithing/ore/examine(mob/user)
-	..()	//I have no clue what this does, yet am scared to remove it.
+	..()
 	if(quality)
 		user << "It is a [quality] sample of ore."
 	else
