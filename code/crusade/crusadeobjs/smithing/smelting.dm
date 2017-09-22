@@ -263,6 +263,7 @@ obj/machinery/smithing/smelter/proc/light_smelter()
 		var/q = C.quality
 		visible_message("[x] refuels the smelter.")
 		refuel(q)
+		qdel(C)
 	else
 		return
 

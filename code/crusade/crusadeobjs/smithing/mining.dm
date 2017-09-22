@@ -80,4 +80,3 @@ obj/item/weapon/smithing/ore/examine(mob/user)
 		user << "It is a [quality] sample of ore."
 	else
 		return
-	//ree
