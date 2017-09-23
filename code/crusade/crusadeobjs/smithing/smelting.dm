@@ -49,14 +49,14 @@ obj/machinery/smithing/smelter/proc/loopcheck() //the main loop. this is probabl
 	while (onFire)
 	sleep(1 SECOND)
 	updateFire()//also Updates the temp
-	if (onFire = 0)
+	if (onFire == 0)
 		while(!onFire)//Loop that cools down the smelter if there's no fire.
 			sleep(1 SECOND)
 			if (Temp > 5)
 				Temp -= 5
 			else
 				Temp = 0
-			if (Temp = 0)
+			if (Temp == 0)
 				return
 
 			//return
@@ -65,7 +65,7 @@ obj/machinery/smithing/smelter/proc/loopcheck() //the main loop. this is probabl
 	//idk what I'm actually doing here send help
 
 obj/machinery/smithing/smelter/proc/updateFire()
-	if (Fuel = 0)
+	if (Fuel == 0)
 		onFire = 0
 		if (currentlypouring)
 			icon_state = "pour"
@@ -166,7 +166,7 @@ obj/machinery/smithing/smelter/proc/pour()
 	var/pourammount = 3
 
 	currentlypouring = TRUE
-	while (currentlypouring = TRUE)
+	while (currentlypouring == TRUE)
 		sleep(.1 SECOND)//this might be laggy idk.
 		//Icon updates//
 		if(onFire)
