@@ -45,7 +45,7 @@ obj/machinery/smithing/smelter
 
 // Big loop boiz
 
-obj/machinery/smithing/smelter/proc/loopcheck() //the main loop. this is probably a reaLly bad way of doing it. have an "igite" verb to start it.
+obj/machinery/smithing/smelter/proc/loopcheck() //jesus christ is it this that crashes the game?
 	while (onFire)
 	sleep(1 SECOND)
 	updateFire()//also Updates the temp
@@ -264,6 +264,34 @@ obj/machinery/smithing/smelter/proc/light_smelter()
 		visible_message("[x] refuels the smelter.")
 		refuel(q)
 		qdel(C)
-	else
+	
+	if(istype(O, /obj/item/weapon/smithing/ore))
+		refill(3)
+		qdel(O)
+		visible_message("[x] tosses some fuel in the smelter.")
+
+	if(istype(O, /obj/item/weapon/smithing/ore/medium))
+		refill(2)
+		qdel(O)
+		visible_message("[x] plops some ore in the smelter.")
+
+	if(istype(O, /obj/item/weapon/smithing/ore/high))
+		refill(1)
+		qdel(O)
+		visible_message("[x] puts some ore in the smelter.")
+	else //this should never happen. but probably will anyway.
 		return
 
+
+
+
+
+obj/machinery/smithing/smelter/proc/refill(X)
+	if (X==1)
+		HighOreSolid += 50 //When changing this, keep in mind the maxstorage value.
+	if (X==2)
+		MediumOreSolid += 50
+	if (X==3)
+		LowOreSolid += 50
+	else //hopefully this would NEVER happen
+		return
