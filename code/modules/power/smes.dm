@@ -78,6 +78,7 @@
 	QDEL_NULL(big_spark)
 	QDEL_NULL(small_spark)
 	SSpower.smes_units -= src
+	QDEL_NULL(terminal)
 	return ..()	// TODO: Properly clean up terminal.
 
 /obj/machinery/power/smes/Initialize()
@@ -267,7 +268,7 @@
 
 
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(W))
 		if(!open_hatch)
 			open_hatch = 1
 			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
@@ -281,7 +282,7 @@
 		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
 		return 0
 
-	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
+	if(iscoil(W) && !terminal && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
 		if (CC.get_amount() <= 10)
@@ -300,7 +301,7 @@
 		stat = 0
 		return 0
 
-	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+	else if(iswirecutter(W) && terminal && !building_terminal)
 		building_terminal = 1
 		var/turf/tempTDir = terminal.loc
 		if (istype(tempTDir))

@@ -10,10 +10,10 @@
 #define LIGHTING_TRANSPARENT_ICON_STATE "blank"
 
 #define LIGHTING_SOFT_THRESHOLD 0.001 // If the max of the lighting lumcounts of each spectrum drops below this, disable luminosity on the lighting overlays.
+#define LIGHTING_BLOCKED_FACTOR 0.5	// How much the range of a directional light will be reduced while facing a wall.
 
-// If defined, a tiny random number will be added to lighting matrixes to prevent a memory leak bug in v510 and below.
-// Enabling this disables lighting rounding.
-//#define LIGHTING_USE_MEMORY_HACK
+// If defined, instant updates will be used whenever server load permits. Otherwise queued updates are always used.
+#define USE_INTELLIGENT_LIGHTING_UPDATES
 
 // If I were you I'd leave this alone.
 #define LIGHTING_BASE_MATRIX \
@@ -111,6 +111,14 @@
 // Just so we can avoid unneeded proc calls when profiling is disabled.
 #define L_PROF(O,T) if (lighting_profiling) {lprof_write(O,T);}
 
-#if !defined(LIGHTING_USE_MEMORY_HACK) && DM_VERSION < 511
-#warn You appear to be using a pre-511 version of BYOND, but have the memory leak hack disabled. You may encounter server crashes due to a memory leak in BYOND 510 and below's handling of color matrixes.
-#endif
+// -- Ambient Occlusion --
+
+// Not handled by the lighting engine, but related. Controls the alpha of the ambient occlusion effect on opaque atoms and openturfs.
+#define WALL_AO_ALPHA 80
+
+#define AO_UPDATE_NONE 0
+#define AO_UPDATE_OVERLAY 1
+#define AO_UPDATE_REBUILD 2
+
+// If defined, integrate with the lighting engine and use its opacity value. Otherwise a simple turf opacity check is used. This may cause visual artifacts with opaque non-square movables.
+//#define AO_USE_LIGHTING_OPACITY

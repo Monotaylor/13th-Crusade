@@ -22,7 +22,7 @@
 	var/turf/T         = loc // If this runtimes atleast we'll know what's creating overlays in things that aren't turfs.
 	T.lighting_overlay = src
 	T.luminosity       = 0
-	
+
 	needs_update = TRUE
 	SSlighting.overlay_queue += src
 
@@ -38,7 +38,7 @@
 	if (istype(T))
 		T.lighting_overlay = null
 		T.luminosity = 1
-	
+
 	return ..()
 
 // This is a macro PURELY so that the if below is actually readable.
@@ -71,8 +71,6 @@
 	var/max = max(cr.cache_mx, cg.cache_mx, cb.cache_mx, ca.cache_mx)
 	luminosity = max > LIGHTING_SOFT_THRESHOLD
 
-// The RNG introduced by LIGHTING_USE_MEMORY_HACK makes this shortcut ineffective.
-#ifndef LIGHTING_USE_MEMORY_HACK
 	var/rr = cr.cache_r
 	var/rg = cr.cache_g
 	var/rb = cr.cache_b
@@ -123,54 +121,11 @@
 				ar, ag, ab, 0,
 				0, 0, 0, 1
 			)
-#else 
-	color = list(
-		cr.cache_r, cr.cache_g, cr.cache_b, 0,
-		cg.cache_r, cg.cache_g, cg.cache_b, 0,
-		cb.cache_r, cb.cache_g, cb.cache_b, 0,
-		ca.cache_r, ca.cache_g, ca.cache_b, 0,
-		0, 0, 0, 1
-	)
-#endif 
 
 	// If we're on an openturf, update the shadower object too.
-	// We could queue an icon update for the entire OT, but this involves less overhead.
 	var/turf/simulated/open/OT = loc:above
 	if (OT)
-		var/atom/movable/openspace/multiplier/shadower = OT.shadower
-		if (!shadower)	// The OT hasn't been initialized yet.
-			OT.update_icon()
-			return
-
-		shadower.appearance = src
-		shadower.plane = OPENTURF_CAP_PLANE
-		shadower.layer = SHADOWER_LAYER
-		shadower.invisibility = 0
-		if (shadower.icon_state == LIGHTING_BASE_ICON_STATE)
-			// We're using a color matrix, so just darken the colors.
-			var/list/c_list = shadower.color
-			c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_GR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_GG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_GB] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_BR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_BG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_BB] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
-			c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
-			shadower.color = c_list
-		else
-			shadower.color = list(
-				SHADOWER_DARKENING_FACTOR, 0, 0,
-				0, SHADOWER_DARKENING_FACTOR, 0,
-				0, 0, SHADOWER_DARKENING_FACTOR
-			)
-
-		if (shadower.bound_overlay)
-			shadower.update_above()
+		OT.update_icon()
 
 #undef ALL_EQUAL
 
@@ -198,4 +153,7 @@
 		. = ..()
 
 /atom/movable/lighting_overlay/shuttle_move(turf/loc)
+	return
+
+/atom/movable/lighting_overlay/conveyor_act()
 	return
