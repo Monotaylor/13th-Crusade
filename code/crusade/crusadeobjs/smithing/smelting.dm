@@ -1,7 +1,7 @@
 //smelting.
 obj/machinery/smithing/smelter
-	name = "Ore Rock thing"
-	desc = "A smeltery. often used for smelting ore and bodies."
+	name = "Smeltery"
+	desc = "A smeltery. often used for Smelting ore."
 	icon = 'icons/crusade/smelting.dmi'
 	icon_state = "smelter" //todo, incorperate iconstates properly
 	anchored = 1
