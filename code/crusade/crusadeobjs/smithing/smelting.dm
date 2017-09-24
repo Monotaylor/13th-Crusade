@@ -20,8 +20,7 @@ obj/machinery/smithing/smelter
 	var/Temp = 0
 	var/Fuel
 	var/MaxStorage = 1000 //This might need changing later.
-	var/currentlypouring
-
+	var/currentlypouring = FALSE
 
 //Relavant Verbs.
 
@@ -45,9 +44,7 @@ obj/machinery/smithing/smelter
 
 // Big loop boiz
 
-obj/machinery/smithing/smelter/proc/loopcheck() //jesus christ is it this that crashes the game?
-	while (onFire)
-	sleep(1 SECOND)
+obj/machinery/smithing/smelter/machinery_process()
 	updateFire()//also Updates the temp
 	if (onFire == 0)
 		while(!onFire)//Loop that cools down the smelter if there's no fire.
@@ -58,46 +55,48 @@ obj/machinery/smithing/smelter/proc/loopcheck() //jesus christ is it this that c
 				Temp = 0
 			if (Temp == 0)
 				return
-
-			//return
-
-	meltOre()
+	if (Temp>0)
+		meltOre()
 	//idk what I'm actually doing here send help
+obj/machinery/smithing/smelter/proc/updateicons()
+	if(currentlypouring==FALSE && onFire==FALSE)
+		icon_state = "smelter"
+	if(currentlypouring==FALSE && onFire==TRUE)
+		icon_state = "onfire"
+	if(currentlypouring==TRUE && onFire==TRUE)
+		icon_state = "onfirepour"
+	if(currentlypouring == TRUE && onFire == FALSE)
+		icon_state = "pour"
+	queue_icon_update()
 
-obj/machinery/smithing/smelter/proc/updateFire()
+obj/machinery/smithing/smelter/proc/updateFire()//Also handles temp and fuel.
+	updateicons()
 	if (Fuel == 0)
 		onFire = 0
-		if (currentlypouring)
-			icon_state = "pour"
-			queue_icon_update()
-		else
-			icon_state = "smelter"
-			queue_icon_update()
-	else
-		if (currentlypouring)
-			icon_state = "onfirepour"
-			queue_icon_update()
-		else
-			icon_state = "onfire"
-			queue_icon_update()
-		if (80>Temp)
-			Fuel -= 40
-		if (40>Temp)
-			Fuel -= 60
-		else
-			Fuel -= 50 //might not work, idk. if it doesn't subtract 50 from fuel, just do it the shit way
-	//temp Update
-	if(Fuel>(MaxStorage/2))
-		if (95>Temp)
-			Temp = 100
-		else
-			Temp += 5
-
-		if (97>Temp)
-			Temp = 100
-		else
-			Temp += 3
-
+		updateicons()
+	else//todo. switch the below: ree
+		if (Temp >= 70 && Temp <= 100)
+			Temp += 10
+			if (Fuel < 8)
+				Fuel -= Fuel
+			else
+				Fuel -= 8
+		if (Temp >= 40 && Temp <= 69)
+			Temp += 8
+			if (Fuel < 10)
+				Fuel -= Fuel
+			else
+				Fuel -= 10
+		if (Temp >= 20 && Temp <= 39)
+			Temp += 6
+			if (Fuel<15)
+				Fuel -= Fuel
+			else
+				Fuel -= 15
+		if (Temp >= 0 && Temp <= 19)
+			Temp += 4
+			if (Fuel<20)
+				Fuel -= Fuel
 
 obj/machinery/smithing/smelter/proc/meltOre()
 //factor in the temp when melting.
@@ -169,7 +168,7 @@ obj/machinery/smithing/smelter/proc/pour()
 	while (currentlypouring == TRUE)
 		sleep(.1 SECOND)//this might be laggy idk.
 		//Icon updates//
-		if(onFire)
+		if(onFire == TRUE)
 			icon_state = "onfirepour"
 			queue_icon_update()
 		if (currentlypouring)
@@ -255,7 +254,6 @@ obj/machinery/smithing/smelter/proc/snuff_smelter()
 
 obj/machinery/smithing/smelter/proc/light_smelter()
 	onFire = TRUE
-	loopcheck()
 
 /obj/machinery/smithing/smelter/attackby(var/obj/item/O, x as mob)
 	if(istype(O, /obj/item/weapon/smithing/coal))
@@ -264,7 +262,7 @@ obj/machinery/smithing/smelter/proc/light_smelter()
 		visible_message("[x] refuels the smelter.")
 		refuel(q)
 		qdel(C)
-	
+
 	if(istype(O, /obj/item/weapon/smithing/ore))
 		refill(3)
 		qdel(O)
@@ -295,3 +293,17 @@ obj/machinery/smithing/smelter/proc/refill(X)
 		LowOreSolid += 50
 	else //hopefully this would NEVER happen
 		return
+
+obj/machinery/smithing/smelter/examine(mob/user)//debug code.
+	..()
+	usr << "HighOreSolid = [HighOreSolid]"
+	usr << "MediumOreSolid = [MediumOreSolid]"
+	usr << "LowOreSolid = [LowOreSolid]"
+	usr << "HighOreLiquid = [HighOreLiquid]"
+	usr << "MediumOreLiquid = [MediumOreLiquid]"
+	usr << "LowOreLiquid = [LowOreLiquid]"
+	usr << "Temp = [Temp]"
+	usr << "OnFire = [onFire]"
+	usr << "CastLevelHigh = [CastLevelHigh]"
+	usr << "CastLevelMedium = [CastLevelMedium]"
+	usr << "CastLevelLow = [CastLevelLow]"
