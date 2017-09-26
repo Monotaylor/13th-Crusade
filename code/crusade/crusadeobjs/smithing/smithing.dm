@@ -41,19 +41,19 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	user << "It looks like [currentobj] is being made here."
 
 /obj/machinery/smithing/anvil/proc/generatelists()
-	for (var/type in subtypesof(/datum/anvil_products/weapon))
+	for (var/type in subtypesof(/datum/anvil_product/weapon))
 		var/datum/anvil_products/P = new type
 		anvil_weapons[P.name] = P
 
-	for (var/type in subtypesof(/datum/anvil_products/armour))
+	for (var/type in subtypesof(/datum/anvil_product/armour))
 		var/datum/anvil_products/P = new type
 		anvil_armour[P.name] = P
 
-	for (var/type in subtypesof(/datum/anvil_products/tool))
+	for (var/type in subtypesof(/datum/anvil_product/tool))
 		var/datum/anvil_products/P = new type
 		anvil_tools[P.name] = P
 
-	for (var/type in subtypesof(/datum/anvil_products/shield))
+	for (var/type in subtypesof(/datum/anvil_product/shield))
 		var/datum/anvil_products/P = new type
 		anvil_sheilds[P.name] = P
 
@@ -156,7 +156,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 			qdel(O)
 
 //todo: DATUMISE ME BAYBEE
-/datum/anvil_products
+/datum/anvil_product
 	var/name
 	var/hits
 	var/hitcost
@@ -164,7 +164,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	var/currentobj = "whew"
 
 //sheilds below.
-/datum/anvil_products/shield
+/datum/anvil_product/shield
 	name = "Shield"
 	hits = 0
 	hitcost = 0
@@ -172,21 +172,21 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	currentobj = "shield"
 
 //weapons below
-/datum/anvil_products/weapon/sword
+/datum/anvil_product/weapon/sword
 	name = "Shortsword"
 	hits = 0
 	hitcost = 0
 	spawneditem = null
 	currentobj = "Some type of sword"
 
-/datum/anvil_products/weapon/axe
+/datum/anvil_product/weapon/axe
 	name = "Sword"
 	hits = 1
 	hitcost = 1
 	spawneditem = /obj/item/weapon/crusade/axe
 	currentobj = "some type of axe"
 
-/datum/anvil_products/weapon/flail
+/datum/anvil_product/weapon/flail
 	name = "Sword"
 	hits = 1
 	hitcost = 1
@@ -194,35 +194,35 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	currentobj = "A heavy ball and a chain."
 
 //Armour below
-/datum/anvil_products/armour
+/datum/anvil_product/armour
 	name = "Armour xdddd"
 	hits = 1
 	hitcost = 1
 	spawneditem = null
 	currentobj = "Some Armour"
 
-/datum/anvil_products/armour/templar
+/datum/anvil_product/armour/templar
 	name = "Chainmail Armour"//probably isnt actually chainmail.
 	hits = 1
 	hitcost = 1
 	spawneditem = /obj/item/clothing/suit/armor/crusader
 	currentobj = "some chainmail"
 
-/datum/anvil_products/armour/templar_heavy
+/datum/anvil_product/armour/templar_heavy
 	name = "Plate Armour"
 	hits = 1
 	hitcost = 1
 	spawneditem = /obj/item/clothing/suit/armor/crusader/heavycrusader
 	currentobj = "some plate armour"
 
-/datum/anvil_products/armour/greathelm
+/datum/anvil_product/armour/greathelm
 	name = "Great Helm"
 	hits = 1
 	hitcost = 1
 	spawneditem = /obj/item/clothing/head/helmet/crusader
 
 //tools below
-/datum/anvil_products/tool
+/datum/anvil_product/tool
 	name = "tool"
 	hits = 0
 	hitcost = 0
