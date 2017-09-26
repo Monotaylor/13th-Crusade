@@ -42,19 +42,19 @@ obj/machinery/smithing/anvil/examine(mob/user)
 
 /obj/machinery/smithing/anvil/proc/generatelists()
 	for (var/type in subtypesof(/datum/anvil_product/weapon))
-		var/datum/anvil_products/P = new type
+		var/datum/anvil_product/P = new type
 		anvil_weapons[P.name] = P
 
 	for (var/type in subtypesof(/datum/anvil_product/armour))
-		var/datum/anvil_products/P = new type
+		var/datum/anvil_product/P = new type
 		anvil_armour[P.name] = P
 
 	for (var/type in subtypesof(/datum/anvil_product/tool))
-		var/datum/anvil_products/P = new type
+		var/datum/anvil_product/P = new type
 		anvil_tools[P.name] = P
 
 	for (var/type in subtypesof(/datum/anvil_product/shield))
-		var/datum/anvil_products/P = new type
+		var/datum/anvil_product/P = new type
 		anvil_sheilds[P.name] = P
 
 /obj/machinery/smithing/anvil/verb/changetargetitem()
