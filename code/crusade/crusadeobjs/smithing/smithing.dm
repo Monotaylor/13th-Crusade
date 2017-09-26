@@ -93,8 +93,8 @@ obj/machinery/smithing/anvil/examine(mob/user)
 		else
 			return 1
 
-	var/datum/anvil_products/current_product = input("Select a product.", "Anvil") as null|anything in current_category
-
+	var/datum/anvil_product/current_product = input("Select a product.", "Anvil") as null|anything in current_category
+	current_product = current_category[current_product]
 	hits = current_product.hits
 	currentobj = current_product.currentobj
 	hitcost = current_product.hitcost
@@ -172,38 +172,53 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	currentobj = "shield"
 
 //weapons below
-/datum/anvil_products/weapon
-	name = "Sword"
+/datum/anvil_products/weapon/sword
+	name = "Shortsword"
 	hits = 0
 	hitcost = 0
 	spawneditem = null
+	currentobj = "Some type of sword"
+
+/datum/anvil_products/weapon/axe
+	name = "Sword"
+	hits = 1
+	hitcost = 1
+	spawneditem = /obj/item/weapon/crusade/axe
+	currentobj = "some type of axe"
+
+/datum/anvil_products/weapon/flail
+	name = "Sword"
+	hits = 1
+	hitcost = 1
+	spawneditem = /obj/item/weapon/crusade/flail
+	currentobj = "A heavy ball and a chain."
 
 //Armour below
 /datum/anvil_products/armour
-	name = "Sword"
-	hits = 0
-	hitcost = 0
+	name = "Armour xdddd"
+	hits = 1
+	hitcost = 1
 	spawneditem = null
 	currentobj = "Some Armour"
 
 /datum/anvil_products/armour/templar
 	name = "Chainmail Armour"//probably isnt actually chainmail.
-	hits = 0
-	hitcost = 0
+	hits = 1
+	hitcost = 1
 	spawneditem = /obj/item/clothing/suit/armor/crusader
 	currentobj = "some chainmail"
 
 /datum/anvil_products/armour/templar_heavy
 	name = "Plate Armour"
-	hits = 0
-	hitcost = 0
+	hits = 1
+	hitcost = 1
 	spawneditem = /obj/item/clothing/suit/armor/crusader/heavycrusader
 	currentobj = "some plate armour"
 
 /datum/anvil_products/armour/greathelm
 	name = "Great Helm"
-	hits = 0
-	hitcost = 0
+	hits = 1
+	hitcost = 1
 	spawneditem = /obj/item/clothing/head/helmet/crusader
 
 //tools below

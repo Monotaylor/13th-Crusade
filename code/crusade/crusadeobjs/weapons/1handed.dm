@@ -50,18 +50,3 @@
 	attack_verb = list("smashed", "crushed","Bashed",)
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	contained_sprite = 1
-
-/obj/item/weapon/crusade
-	name = "Shortsword"
-	desc = "A thick, sharp blade with a simple handle."
-	icon = 'icons/obj/sword.dmi'
-	icon_state = "canesword"
-	item_state = "canesword"
-	force = 20 //tweak this 
-	throwforce = 5
-	w_class = 4
-	sharp = 1
-	edge = 1
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	contained_sprite = 1
