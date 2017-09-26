@@ -45,9 +45,9 @@
 	force = 20 //tweak this 
 	throwforce = 5
 	w_class = 4
-	sharp = 1
-	edge = 1
-	attack_verb = list("smashed", "crushed", "smacked", "sliced", "torn", "ripped", "diced", "cut")
+	sharp = 0
+	edge = 0
+	attack_verb = list("smashed", "crushed","Bashed",)
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	contained_sprite = 1
 

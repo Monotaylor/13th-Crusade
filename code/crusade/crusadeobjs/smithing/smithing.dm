@@ -163,7 +163,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	var/spawneditem
 	var/currentobj = "whew"
 
-
+//sheilds below.
 /datum/anvil_products/shield
 	name = "Shield"
 	hits = 0
@@ -171,18 +171,42 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	spawneditem = null
 	currentobj = "shield"
 
+//weapons below
 /datum/anvil_products/weapon
 	name = "Sword"
 	hits = 0
 	hitcost = 0
 	spawneditem = null
 
+//Armour below
 /datum/anvil_products/armour
 	name = "Sword"
 	hits = 0
 	hitcost = 0
 	spawneditem = null
+	currentobj = "Some Armour"
 
+/datum/anvil_products/armour/templar
+	name = "Chainmail Armour"//probably isnt actually chainmail.
+	hits = 0
+	hitcost = 0
+	spawneditem = /obj/item/clothing/suit/armor/crusader
+	currentobj = "some chainmail"
+
+/datum/anvil_products/armour/templar_heavy
+	name = "Plate Armour"
+	hits = 0
+	hitcost = 0
+	spawneditem = /obj/item/clothing/suit/armor/crusader/heavycrusader
+	currentobj = "some plate armour"
+
+/datum/anvil_products/armour/greathelm
+	name = "Great Helm"
+	hits = 0
+	hitcost = 0
+	spawneditem = /obj/item/clothing/head/helmet/crusader
+
+//tools below
 /datum/anvil_products/tool
 	name = "tool"
 	hits = 0
