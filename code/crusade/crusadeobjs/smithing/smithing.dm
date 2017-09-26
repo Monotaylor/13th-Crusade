@@ -80,18 +80,18 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	if (hits > 0)
 		usr << "You've already started work! Finish what you've started, asshole!"
 		return
-		visible_message("Alert Phase.")
-		switch(alert("What would you like to make?",,"Armour","Weapons","Tools","Shields"))
-			if("Armour")
-				current_category = anvil_armour
-			if("Weapons")
-				current_category = anvil_weapons
-			if("Tools")
-				current_category = anvil_tools
-			if("Shields")
-				current_category = anvil_sheilds
-			else
-				return 1
+	
+	switch(alert("What would you like to make?",,"Armour","Weapons","Tools","Shields"))
+		if("Armour")
+			current_category = anvil_armour
+		if("Weapons")
+			current_category = anvil_weapons
+		if("Tools")
+			current_category = anvil_tools
+		if("Shields")
+			current_category = anvil_sheilds
+		else
+			return 1
 
 	var/datum/anvil_products/current_product = input("Select a product.", "Anvil") as null|anything in current_category
 
