@@ -63,11 +63,13 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	set src in oview(1)
 	change_item()
 
+/obj/machinery/smithing/anvil/Initialise(mapload)
+	.=..()
+	generatelists()//this is probably cancer tier performance wise. the lists don't change. move this to Initialise.
 
 
 /obj/machinery/smithing/anvil/proc/change_item()
 	var/mob/M = usr
-	generatelists()//this is probably cancer tier performance wise. the lists don't change. move this to Initialise.
 	if(M.stat || M.paralysis || M.stunned || M.weakened || M.restrained())
 		usr << "you cannot decide on what to make at an Anvil when you're not in a state where you can concentrate, dingus."
 		return
