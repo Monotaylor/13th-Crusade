@@ -1,6 +1,13 @@
-/* A never ending hoarde of shit code from yours truly
+  /* A never ending hoarde of shit code from yours truly
 -Pacmandevil
 */
+var/global/list/anvil_sheilds = list()
+var/global/list/anvil_weapons = list()
+var/global/list/anvil_armour = list()
+var/global/list/anvil_tools = list()
+
+
+
 obj/machinery/smithing/
 	name = "hmmmm"
 	desc = "It's broke"
@@ -22,6 +29,7 @@ obj/machinery/smithing/anvil //I have no idea what I am doing.
 	anchored = 1
 	use_power = 0
 	density = 1
+	var/current_category
 
 obj/machinery/smithing/anvil/examine(mob/user)
 	..()	//I have no clue what this does, yet am scared to remove it.
@@ -30,22 +38,39 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	else
 		user << "It looks like it has no metal left."
 
+	user << "It looks like [currentobj] is being made here."
+
+/obj/machinery/smithing/anvil/proc/generatelists()
+	for (var/type in subtypesof(/datum/anvil_products/weapon))
+		var/datum/anvil_products/P = new type
+		anvil_weapons[P.name] = P
+
+	for (var/type in subtypesof(/datum/anvil_products/armour))
+		var/datum/anvil_products/P = new type
+		anvil_armour[P.name] = P
+
+	for (var/type in subtypesof(/datum/anvil_products/tool))
+		var/datum/anvil_products/P = new type
+		anvil_tools[P.name] = P
+
+	for (var/type in subtypesof(/datum/anvil_products/shield))
+		var/datum/anvil_products/P = new type
+		anvil_sheilds[P.name] = P
+
 /obj/machinery/smithing/anvil/verb/changetargetitem()
 	set name = "Select item"
 	set category = "Smithing"
 	set src in oview(1)
 	change_item()
 
+
+
 /obj/machinery/smithing/anvil/proc/change_item()
 	var/mob/M = usr
+	generatelists()//this is probably cancer tier performance wise. the lists don't change. move this to Initialise.
 	if(M.stat || M.paralysis || M.stunned || M.weakened || M.restrained())
 		usr << "you cannot decide on what to make at an Anvil when you're not in a state where you can concentrate, dingus."
 		return
-
-	var/list/possibleitems = list("Longsword","Shortsword","Battle Axe",
-	"Battle Hammer","Sabre","Dao","Claymore",
-	"Great Helm","Basic Armor","Heavy Armor","Buckler","Large Shield","Kite Sheild")
-//I wonder if I can do this.
 
 	if(get_dist(usr, src) > 1)
 		usr << "You have moved too far away."
@@ -53,64 +78,28 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	if (hits > 0)
 		usr << "You've already started work! Finish what you've started, asshole!"
 		return
-	var/currentobj = input("Anvil Selection", "what would you like to make?") as null|anything in possibleitems
-	usr << "you've decided to make a [currentobj]."
-	switch (currentobj) //todo: make this datumised baybee - update the item paths so they work.
-		if ("Longsword")
-			hits = 10
-			spawneditem = /obj/item/weapon/material/sword/longsword
-			hitcost = 5
-		if ("Shortsword")
-			hits = 2
-			spawneditem = /obj/item/weapon/material/sword/gladius
-			hitcost = 10
-		if ("Battle Axe")
-			hits = 3
-			spawneditem = /obj/item/weapon/material/sword/axe
-			hitcost = 0
-		if ("Battle Hammer")
-			hits = 4
-			spawneditem = /mob/living/simple_animal/corgi/Ian //todo, add the battle hammer, 2 handed. skyrim style.
-			hitcost = 0
-		if ("Sabre")
-			hits = 5
-			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
-		if ("Dao")
-			hits = 6
-			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
-		if ("Claymore")
-			hits = 7
-			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
-		if ("Great Helm")
-			hits = 8
-			spawneditem = /obj/item/clothing/head/helmet/crusader
-			hitcost = 0
-		if ("Basic Armor")
-			hits = 9
-			spawneditem = /obj/item/clothing/suit/armor/crusader
-			hitcost = 0
-		if ("Heavy Armor")
-			hits = 10
-			spawneditem = /obj/item/clothing/suit/armor/crusader/heavycrusader
-			hitcost = 0
-		if ("Test11")
-			hits = 11
-			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
-		if ("Test12")
-			hits = 12
-			spawneditem = /mob/living/simple_animal/corgi/Ian
-		if ("Test13")
-			hits = 13
-			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
-		if ("Test14")
-			hits = 14
-			spawneditem = /mob/living/simple_animal/corgi/Ian
-			hitcost = 0
+		visible_message("Alert Phase.")
+		switch(alert("What would you like to make?",,"Armour","Weapons","Tools","Shields"))
+			if("Armour")
+				current_category = anvil_armour
+			if("Weapons")
+				current_category = anvil_weapons
+			if("Tools")
+				current_category = anvil_tools
+			if("Shields")
+				current_category = anvil_sheilds
+			else
+				return 1
+
+	var/datum/anvil_products/current_product = input("Select a product.", "Anvil") as null|anything in current_category
+
+	hits = current_product.hits
+	currentobj = current_product.currentobj
+	hitcost = current_product.hitcost
+	spawneditem = current_product.spawneditem
+
+
+////
 
 /obj/machinery/smithing/anvil/proc/clang()//CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG CLANG
 	//This is the on hit shit for an anvil.
@@ -165,3 +154,35 @@ obj/machinery/smithing/anvil/examine(mob/user)
 			qdel(O)
 
 //todo: DATUMISE ME BAYBEE
+/datum/anvil_products
+	var/name
+	var/hits
+	var/hitcost
+	var/spawneditem
+	var/currentobj = "whew"
+
+
+/datum/anvil_products/shield
+	name = "Shield"
+	hits = 0
+	hitcost = 0
+	spawneditem = null
+	currentobj = "shield"
+
+/datum/anvil_products/weapon
+	name = "Sword"
+	hits = 0
+	hitcost = 0
+	spawneditem = null
+
+/datum/anvil_products/armour
+	name = "Sword"
+	hits = 0
+	hitcost = 0
+	spawneditem = null
+
+/datum/anvil_products/tool
+	name = "tool"
+	hits = 0
+	hitcost = 0
+	spawneditem = null
