@@ -63,7 +63,7 @@ obj/machinery/smithing/anvil/examine(mob/user)
 	set src in oview(1)
 	change_item()
 
-/obj/machinery/smithing/anvil/Initialise(mapload)
+/obj/machinery/smithing/anvil/Initialize()
 	.=..()
 	generatelists()//this is probably cancer tier performance wise. the lists don't change. move this to Initialise.
 
