@@ -155,7 +155,10 @@ obj/machinery/smithing/anvil/examine(mob/user)
 			refill()
 			qdel(O)
 
-//todo: DATUMISE ME BAYBEE
+/*
+Todo:
+make using the anvil with the clumsy mutation hit yourself in the foot.
+*/
 /datum/anvil_product
 	var/name
 	var/hits
