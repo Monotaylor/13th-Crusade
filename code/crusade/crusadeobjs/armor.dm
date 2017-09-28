@@ -27,7 +27,7 @@
 	icon = 'icons/crusade/armour/crusader.dmi'
 	name = "Crusader Helmet"
 	desc = "Deus Vult."
-	icon_state = "knight_templar"
+	icon_state = "knight_templar_helm"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE
 	siemens_coefficient = 1

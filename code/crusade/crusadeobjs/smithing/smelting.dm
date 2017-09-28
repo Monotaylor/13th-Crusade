@@ -67,37 +67,47 @@ obj/machinery/smithing/smelter/proc/updateicons()
 		icon_state = "onfirepour"
 	if(currentlypouring == TRUE && onFire == FALSE)
 		icon_state = "pour"
-	queue_icon_update()
+		queue_icon_update()
 
 obj/machinery/smithing/smelter/proc/updateFire()//Also handles temp and fuel.
 	updateicons()
-	if (Fuel == 0)
-		onFire = 0
-		updateicons()
-	else//todo. switch the below: ree
+	if(onFire)
 		if (Temp >= 70 && Temp <= 100)
 			Temp += 10
 			if (Fuel < 8)
+				if (Fuel < 0)
+					return
 				Fuel -= Fuel
 			else
 				Fuel -= 8
 		if (Temp >= 40 && Temp <= 69)
 			Temp += 8
 			if (Fuel < 10)
+				if (Fuel < 0)
+					Fuel = 0
+					onFire = FALSE
+					return			
 				Fuel -= Fuel
 			else
 				Fuel -= 10
 		if (Temp >= 20 && Temp <= 39)
 			Temp += 6
 			if (Fuel<15)
+				if (Fuel < 0)
+					onFire = FALSE
+					return			
 				Fuel -= Fuel
 			else
 				Fuel -= 15
-		if (Temp >= 0 && Temp <= 19)
+		if (Temp >= 1 && Temp <= 19)
 			Temp += 4
 			if (Fuel<20)
+				if (Fuel < 0)
+					Fuel = 0
+					onFire = FALSE
+					return
 				Fuel -= Fuel
-
+	updateicons()
 obj/machinery/smithing/smelter/proc/meltOre()
 //factor in the temp when melting.
 	if(HighOreLiquid>=MaxStorage && MediumOreLiquid>=MaxStorage && LowOreLiquid>=MaxStorage) //if all the storages are full.
@@ -279,9 +289,6 @@ obj/machinery/smithing/smelter/proc/light_smelter()
 		visible_message("[x] puts some ore in the smelter.")
 	else //this should never happen. but probably will anyway.
 		return
-
-
-
 
 
 obj/machinery/smithing/smelter/proc/refill(X)
