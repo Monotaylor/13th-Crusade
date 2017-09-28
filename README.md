@@ -1,15 +1,11 @@
-# Aurorastation
+# The 13th Crusade
 
-**[Website](https://aurorastation.org/)**
-
-**[Code](https://github.com/Aurorastation/Aurora.3)**
-
-[![Krihelimeter](http://www.krihelinator.xyz/badge/Aurorastation/Aurora.3)](http://www.krihelinator.xyz/repositories/Aurorastation/Aurora.3)
+**[Code](https://github.com/Pacmandevil/13th-Crusade)**
 
 ---
 
 ### LICENSE
-Aurorastation is licensed under the GNU Affero General Public License version 3, which can be found in full in LICENSE-AGPL3.txt.
+The 13th Crusade is licensed under the GNU Affero General Public License version 3, which can be found in full in LICENSE-AGPL3.txt.
 
 Commits with a git authorship date prior to `1420675200 +0000` (2015/01/08 00:00) are licensed under the GNU General Public License version 3, which can be found in full in LICENSE-GPL3.txt.
 
@@ -19,28 +15,15 @@ If you wish to develop and host this codebase in a closed source manner you may 
 
 See [here](https://www.gnu.org/licenses/why-affero-gpl.html) for more information.
 
-### GETTING THE CODE
-The simplest way to obtain the code is using the github .zip feature.
-
-Click [here](https://github.com/Aurorastation/Aurora.3/archive/master.zip) to get the latest stable code as a .zip file, then unzip it to wherever you want.
-
-The more complicated and easier to update method is using git.  You'll need to download git or some client from [here](http://git-scm.com/).  When that's installed, right click in any folder and click on "Git Bash".  When that opens, type in:
-
-    git clone https://github.com/Aurorastation/Aurora.3.git
-
-(hint: hold down ctrl and press insert to paste into git bash)
-
-This will take a while to download, but it provides an easier method for updating.
-
 ### INSTALLATION
 
 First-time installation should be fairly straightforward.  First, you'll need BYOND installed.  You can get it from [here](http://www.byond.com/).
 
 This is a sourcecode-only release, so the next step is to compile the server files.  Open aurorastation.dme by double-clicking it, open the Build menu, and click compile.  This'll take a little while, and if everything's done right you'll get a message like this:
 
-    saving aurorastation.dmb (DEBUG mode)
+    saving 13thCrusade.dmb (DEBUG mode)
 
-    aurorastation.dmb - 0 errors, 0 warnings
+    13thCrusade.dmb - 0 errors, 0 warnings
 
 If you see any errors or warnings, something has gone wrong - possibly a corrupt download or the files extracted wrong, or a code issue on the main repo. Ask on the server Discord if you're completely lost.
 
@@ -92,3 +75,6 @@ The SQL backend for the library and stats tracking requires a MySQL server, as d
 The Aurorastation codebase uses a built-in Discord bot to interface with Discord. Some of its features rely on the MySQL database, specifically, channel storage and configuration. So a database is required for its operation. If that is present, then setup is relatively easy: simply set up the `config/discord.txt` file according to the example located in the `config/example/` folder, and populate the database with appropriate channel and server information.
 
 At present, there is no built in GUI for doing the latter. So direct database modification is required unless you set up the python companion bot. The python companion bot is BOREALIS II, and can be located [here](https://github.com/Aurorastation/BOREALISbot2). Though not required, it makes database modification easier. See commands that start with `channel_`.
+
+### Design Documentation
+The Design Documentation for The 13th Crusade is avalible [here](https://goo.gl/Q2LV32)
