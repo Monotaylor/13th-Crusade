@@ -1,9 +1,9 @@
-//smelting.
+//I don't know what I'm doing. I need an adult.
 obj/machinery/smithing/smelter
 	name = "Smeltery"
 	desc = "A smeltery. often used for Smelting ore."
 	icon = 'icons/crusade/smelting.dmi'
-	icon_state = "smelter" //todo, incorperate iconstates properly
+	icon_state = "smelter"
 	anchored = 1
 	use_power = 0
 	density = 1
@@ -21,6 +21,8 @@ obj/machinery/smithing/smelter
 	var/Fuel
 	var/MaxStorage = 1000 //This might need changing later.
 	var/currentlypouring = FALSE
+	var/ingotmax = 100
+	var/pourammount = 3
 
 //Relavant Verbs.
 
@@ -47,17 +49,49 @@ obj/machinery/smithing/smelter
 obj/machinery/smithing/smelter/machinery_process()
 	updateFire()//also Updates the temp
 	if (onFire == 0)
-		while(!onFire)//Loop that cools down the smelter if there's no fire.
+		while(!onFire && Temp>0)//Loop that cools down the smelter if there's no fire.
 			sleep(1 SECOND)
 			if (Temp > 5)
 				Temp -= 5
 			else
 				Temp = 0
 			if (Temp == 0)
-				return
-	if (Temp>0)
+				break
+	if(onFire)
 		meltOre()
-	//idk what I'm actually doing here send help
+
+	if(currentlypouring)//the melt controll baybee
+		if(HighOreLiquid+MediumOreLiquid+LowOreLiquid > 0)
+			updateicons()
+			//checks how much space is left in the ingot.
+			if(HighOreLiquid >= pourammount)
+				HighOreLiquid -= pourammount
+				CastLevelHigh += pourammount
+			else
+				CastLevelHigh += HighOreLiquid
+				HighOreLiquid = 0
+
+			if(MediumOreLiquid >= pourammount)
+				MediumOreLiquid -= pourammount
+				CastLevelMedium += pourammount
+			else
+				CastLevelHigh += HighOreLiquid
+				HighOreLiquid = 0
+
+			if(LowOreLiquid >= pourammount)
+				LowOreLiquid -= pourammount
+				CastLevelLow += pourammount
+			else
+				CastLevelLow += LowOreLiquid
+				LowOreLiquid = 0
+
+		if(HighOreLiquid ==0 && MediumOreLiquid == 0 && LowOreLiquid ==0)
+			dispenseingot()
+			currentlypouring = FALSE
+		if(CastLevelHigh+CastLevelMedium+CastLevelLow >= ingotmax-(pourammount))
+			dispenseingot()
+			currentlypouring = FALSE
+
 obj/machinery/smithing/smelter/proc/updateicons()
 	if(currentlypouring==FALSE && onFire==FALSE)
 		icon_state = "smelter"
@@ -72,6 +106,10 @@ obj/machinery/smithing/smelter/proc/updateicons()
 obj/machinery/smithing/smelter/proc/updateFire()//Also handles temp and fuel.
 	updateicons()
 	if(onFire)
+		if (Fuel == 0 || Fuel < 0)
+			onFire = FALSE
+			visible_message("<span class='danger'>The Fire on the smelter goes out!</span>")
+			return
 		if (Temp >= 70 && Temp <= 100)
 			Temp += 10
 			if (Fuel < 8)
@@ -166,89 +204,19 @@ obj/machinery/smithing/smelter/proc/meltOre()
 
 //Pouring
 obj/machinery/smithing/smelter/proc/pour()
-
-
-	//evenly distributes material into the cast, then "hardens" - doing dispenseingot()
-
-	//this takes EVERYTHING avalible up to a max to put in an ingot, it does not need all of it.
-	var/ingotmax = 100
-	var/pourammount = 3
-
 	currentlypouring = TRUE
-	while (currentlypouring == TRUE)
-		sleep(.1 SECOND)//this might be laggy idk.
-		//Icon updates//
-		if(onFire == TRUE)
-			icon_state = "onfirepour"
-			queue_icon_update()
-		if (currentlypouring)
-			icon_state = "pour"
-			queue_icon_update()
-		else
-			icon_state = "smelter"
-			queue_icon_update()
 
-		if (CastLevelLow+CastLevelMedium+CastLevelHigh > ingotmax-pourammount) //if there's no more room in the ingot, return.
-			currentlypouring = FALSE
-			dispenseingot()
-			return
-
-		//drain either the pourammount if there's room, the remainder of the storage, or all needed to fill up the ingot. High.
-		if (ingotmax-CastLevelLow+CastLevelMedium+CastLevelHigh >= pourammount)
-			var/remainingspaceiningot = CastLevelLow+CastLevelMedium+CastLevelHigh
-			if (remainingspaceiningot > pourammount)
-				continue
-			else
-				pourammount = remainingspaceiningot
-
-		if (pourammount > HighOreLiquid)
-			pourammount = HighOreLiquid
-
-		CastLevelHigh += pourammount		// actually does the pouring.
-		HighOreLiquid -= pourammount
-
-		//drain either the pourammount if there's room, the remainder of the storage, or all needed to fill up the ingot. Medium.
-		if (ingotmax-CastLevelLow+CastLevelMedium+CastLevelHigh >= pourammount)
-			var/remainingspaceiningot = CastLevelLow+CastLevelMedium+CastLevelHigh
-			if (remainingspaceiningot > pourammount)
-				continue
-			else
-				pourammount = remainingspaceiningot
-
-		if (pourammount > MediumOreLiquid)
-			pourammount = MediumOreLiquid
-
-		CastLevelMedium += pourammount
-		MediumOreLiquid -= pourammount
-
-		//drain either the pourammount if there's room, the remainder of the storage, or all needed to fill up the ingot. Low.
-		if (ingotmax-CastLevelLow+CastLevelMedium+CastLevelHigh >= pourammount)
-			var/remainingspaceiningot = CastLevelLow+CastLevelMedium+CastLevelHigh
-			if (remainingspaceiningot > pourammount)
-				continue
-			else
-				pourammount = remainingspaceiningot
-
-		if (pourammount > HighOreLiquid)
-			pourammount = HighOreLiquid
-
-		CastLevelLow += pourammount
-		LowOreLiquid -= pourammount
-
-		var/remainingspaceiningot = CastLevelLow+CastLevelMedium+CastLevelHigh
-		//checks the space left in the ingot.
-		if (remainingspaceiningot > pourammount*3)
-			continue
-		else
-			return
-
-obj/machinery/smithing/smelter/proc/dispenseingot() // the thing that actually spawns the ingot
-	var/obj/item/weapon/smithing/ingot/ingot = new
-	name = "Iron Ingot"
+obj/machinery/smithing/smelter/proc/dispenseingot()
+	var/obj/item/weapon/smithing/ingot/ingot = new(src.loc)
+	ingot.name = "Iron Ingot"
 	ingot.High = CastLevelHigh
 	ingot.Medium = CastLevelMedium
 	ingot.Low = CastLevelLow
-
+	sleep(1)
+	CastLevelHigh = 0
+	CastLevelMedium = 0
+	CastLevelLow = 0
+	
 obj/machinery/smithing/smelter/proc/refuel(F)
 	var/quality = F
 	switch(quality)
@@ -264,6 +232,7 @@ obj/machinery/smithing/smelter/proc/snuff_smelter()
 
 obj/machinery/smithing/smelter/proc/light_smelter()
 	onFire = TRUE
+	Temp = 3 //because I'm too lazy to actually fix the issue.
 
 /obj/machinery/smithing/smelter/attackby(var/obj/item/O, x as mob)
 	if(istype(O, /obj/item/weapon/smithing/coal))
