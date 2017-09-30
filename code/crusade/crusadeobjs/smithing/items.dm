@@ -5,14 +5,16 @@ obj/item/weapon/smithing
 	icon = 'icons/crusade/smithing.dmi'
 
 obj/item/weapon/smithing/hammer
-	name = "hammer"
+	name = "Hammer"
 	desc = "Clang"
 	icon_state = "hammer"
+	item_state = "hammer"
 	force = 10
-
+	contained_sprite = 1
+	
 obj/item/weapon/smithing/ingot
-	name = "iron ingot"
-	desc = "Bluh"
+	name = "iron billet"
+	desc = "Not to be confused with an Ingot. they're completely different. Apperently."
 	icon_state = "ingot"
 	var/High
 	var/Medium //this is for quality boyz

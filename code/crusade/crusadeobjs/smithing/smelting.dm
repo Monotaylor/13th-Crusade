@@ -23,6 +23,7 @@ obj/machinery/smithing/smelter
 	var/currentlypouring = FALSE
 	var/ingotmax = 100
 	var/pourammount = 3
+	light_color = LIGHT_COLOR_FIRE
 
 //Relavant Verbs.
 
@@ -95,13 +96,17 @@ obj/machinery/smithing/smelter/machinery_process()
 obj/machinery/smithing/smelter/proc/updateicons()
 	if(currentlypouring==FALSE && onFire==FALSE)
 		icon_state = "smelter"
+		set_light(0,0)
 	if(currentlypouring==FALSE && onFire==TRUE)
 		icon_state = "onfire"
+		set_light(5,0.8)
 	if(currentlypouring==TRUE && onFire==TRUE)
 		icon_state = "onfirepour"
+		set_light(6,0.9)
 	if(currentlypouring == TRUE && onFire == FALSE)
 		icon_state = "pour"
-		queue_icon_update()
+		set_light(2,0.2)
+	queue_icon_update()
 
 obj/machinery/smithing/smelter/proc/updateFire()//Also handles temp and fuel.
 	updateicons()

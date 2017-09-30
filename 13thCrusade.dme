@@ -199,6 +199,7 @@
 #include "code\controllers\subsystems\processing\processing.dm"
 #include "code\controllers\subsystems\processing\shuttle.dm"
 #include "code\crusade\crusadeobjs\armor.dm"
+#include "code\crusade\crusadeobjs\clothing.dm"
 #include "code\crusade\crusadeobjs\smithing\items.dm"
 #include "code\crusade\crusadeobjs\smithing\mining.dm"
 #include "code\crusade\crusadeobjs\smithing\smelting.dm"
