@@ -86,3 +86,6 @@
 
 // Connection prefixes for player-editable fields
 #define WP_ELECTRONICS "elec_"
+
+//lohikar told me to add this
+#define CUT_OVERLAY_IN_PRIORITY(ovr, time) addtimer(CALLBACK(src, /atom/.proc/cut_overlay, ovr, TRUE), time, TIMER_STOPPABLE | TIMER_CLIENT_TIME)
